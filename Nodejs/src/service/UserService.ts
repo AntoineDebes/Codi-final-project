@@ -1,6 +1,7 @@
+import { jwtCreate } from "./../middleware/jwt";
 import { Request } from "express";
-import { UserModel as User } from "../entity/User";
-import { jwtCreate } from "../middleware/jwt";
+import { GetUserAuthInfoRequest } from "../entity/Request";
+import { UserModelCreate, UserModelLogin } from "../entity/User";
 const db = require("./db");
 const bcrypt = require("bcrypt");
 
@@ -14,50 +15,85 @@ async function CreateUser(req: Request) {
     password,
     address,
     verified,
-  } = req.body;
-
-  const token = jwtCreate(userName);
+  }: UserModelCreate = req.body;
 
   const result = await db.query(
     `INSERT INTO users
-      (first_name, last_name, user_name, phone, email, password, address, verified, token) 
+      (first_name, last_name, user_name, phone, email, password, address, verified) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      firstName,
-      lastName,
-      userName,
-      phone,
-      email,
-      password,
-      address,
-      verified,
-      token,
-    ]
+      (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [firstName, lastName, userName, phone, email, password, address, verified]
+  );
+  const targetedUser: any = await db.query(
+    "SELECT ID FROM users WHERE email=?",
+    [email]
+  );
+  const ID = targetedUser[0].ID;
+  const token = await jwtCreate(ID);
+
+  const tokenInsert = await db.query(
+    `UPDATE users 
+    SET token=? 
+    WHERE ID=?`,
+    [token, ID]
   );
 
-  let message = "Error in creating programming language";
+  let message = "Error in creating user";
 
-  if (result.affectedRows) {
-    message = "Programming language created successfully";
+  if (result.affectedRows && tokenInsert.affectedRows) {
+    message = "success";
   }
 
   return { message };
 }
 
 async function LogUserIn(req: Request) {
-  const { email, password } = req.body;
+  const { email, password }: UserModelLogin = req.body;
 
   const result = await db.query(
     `
   SELECT * FROM users WHERE email = ? AND password = ?`,
     [email, password]
   );
-  let message = "Error in creating programming language";
+  let message = "Error in login user";
 
   if (result) {
     console.log(result);
 
+    const token = await jwtCreate(result[0].ID);
+    return {
+      token: token,
+      message: "success",
+    };
+  }
+  return { message };
+}
+
+async function EmailVerification(req: GetUserAuthInfoRequest) {
+  const { userID } = req;
+  const result = await db.query(
+    `UPDATE users 
+    SET verified=? 
+    WHERE ID=?`,
+    [1, userID]
+  );
+
+  let message = "Error in verifying user";
+
+  if (result.affectedRows) {
+    message = "success";
+  }
+
+  return { message };
+}
+
+async function deleteUser(req: GetUserAuthInfoRequest) {
+  const { userID } = req;
+
+  const result = await db.query(`DELETE FROM users WHERE ID=?`, [userID]);
+  let message = "Error in deleting your profile";
+
+  if (result.affectedRows) {
     return {
       message: "success",
     };
@@ -112,5 +148,7 @@ async function LogUserIn(req: Request) {
 const UserCrud = {
   CreateUser,
   LogUserIn,
+  deleteUser,
+  EmailVerification,
 };
 export default UserCrud;

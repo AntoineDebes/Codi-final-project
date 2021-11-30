@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { GetUserAuthInfoRequest } from "../entity/Request";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 export const jwtVerify = async (
-  request: Request,
+  request: GetUserAuthInfoRequest,
   response: Response,
   next: Function
 ) => {
@@ -17,6 +18,7 @@ export const jwtVerify = async (
         if (err) {
           return { message: "invalid token", status: 401 };
         } else {
+          request.userID = decoded.ID;
           next();
         }
       }
@@ -28,8 +30,9 @@ export const jwtVerify = async (
     });
 };
 
-export const jwtCreate = (username) => {
-  const accessToken = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, {
+export const jwtCreate = (ID: any) => {
+  const accessToken = jwt.sign({ ID }, process.env.ACCESS_TOKEN_SECRET, {
+    noTimestamp: true,
     expiresIn: "1y",
   });
   return accessToken;

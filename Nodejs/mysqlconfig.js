@@ -2,11 +2,10 @@ const env = process.env;
 
 const config = {
   db: {
-    /* don’t expose password or any sensitive info, done only for demo */
     host: env.DB_HOST || "localhost",
-    user: env.DB_USER || "root",
-    password: env.DB_PASSWORD || "",
-    database: env.DB_NAME || "your_project_DB_name",
+    user: env.DB_USER || "antoine",
+    password: env.DB_PASSWORD || "Antoinedebes123",
+    database: env.DB_NAME || "final-project",
   },
 };
 

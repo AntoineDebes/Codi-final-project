@@ -1,14 +1,7 @@
-import { jwtVerify, jwtCreate } from "./../middleware/jwt";
+import { jwtVerify } from "./../middleware/jwt";
 import { UserController } from "../controller/UserController";
 
 export const UserRoutes = [
-  {
-    method: "get",
-    route: "/users",
-    // middleware: jwtVerify,
-    controller: UserController,
-    action: "all",
-  },
   {
     method: "post",
     route: "/EmailVerification",
@@ -20,17 +13,18 @@ export const UserRoutes = [
     method: "post",
     route: "/users",
     controller: UserController,
-    action: "save",
+    action: "register",
   },
   {
     method: "delete",
-    route: "/users/:id",
+    route: "/users",
+    middleware: [jwtVerify],
     controller: UserController,
-    action: "remove",
+    action: "delete",
   },
   {
     method: "post",
-    route: "/userLogIn",
+    route: "/userLogin",
     controller: UserController,
     action: "login",
   },
