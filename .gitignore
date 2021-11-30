@@ -5,6 +5,7 @@
 */.pnp
 */.pnp.js
 */.env
+*/mysqlconfig.js
 
 # testing
 */coverage
