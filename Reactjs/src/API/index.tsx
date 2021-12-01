@@ -1,32 +1,30 @@
-import Axios from "axios";
+import Axios, { Method } from "axios";
 
 interface ApiProps {
-  method: any;
+  method: Method;
   fetchApiUrl: string;
-  selectedIds?: {} | [];
+  data?: any;
 }
 
-function Api({ method, fetchApiUrl, selectedIds }: ApiProps) {
+function Api({ method, fetchApiUrl, data }: ApiProps) {
   const token = localStorage.getItem("login") ?? "";
 
   return new Promise((res, rej) => {
     Axios({
-      method: method, // Method like GET, POST, DELETE, PUT ...
+      method, // Method like GET, POST, DELETE, PUT ...
       url: `${process.env.REACT_APP_API_URL}${fetchApiUrl}`,
       headers: {
         Authorization: token, // sending the token for the verification
       },
-      data: {
-        // This section is for the deleted ids it sends in the body
-        ids: selectedIds,
-      },
+      data, // data passed
     })
       .then((response) => {
+        console.log(response);
         res(response);
       })
-      .catch((e) => {
-        localStorage.clear();
-        rej(e);
+      .catch((err) => {
+        console.log(err);
+        rej(err);
       });
   });
 }

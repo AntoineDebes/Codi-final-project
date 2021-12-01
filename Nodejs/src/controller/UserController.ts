@@ -6,30 +6,27 @@ export class UserController {
     try {
       return response.status(200).json(await UserCrud.CreateUser(request));
     } catch (error) {
-      return {
+      return response.status(403).json({
         message: error.message,
-        status: 500,
-      };
+      });
     }
   }
   async login(request: Request, response: Response, next: NextFunction) {
     try {
       return response.status(200).json(await UserCrud.LogUserIn(request));
     } catch (error) {
-      return {
-        message: "invalid userName or Password",
-        status: 500,
-      };
+      return response.status(401).json({
+        message: "invalid Username or Password",
+      });
     }
   }
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
       return response.status(200).json(await UserCrud.deleteUser(request));
     } catch (error) {
-      return {
-        message: { error },
-        status: 500,
-      };
+      return response.status(403).json({
+        message: error.message,
+      });
     }
   }
   async EmailVerification(

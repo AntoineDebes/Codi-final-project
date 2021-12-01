@@ -2,6 +2,7 @@ import { jwtCreate } from "./../middleware/jwt";
 import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
+import { error } from "console";
 const db = require("./db");
 const bcrypt = require("bcrypt");
 
@@ -14,15 +15,21 @@ async function CreateUser(req: Request) {
     email,
     password,
     address,
-    verified,
   }: UserModelCreate = req.body;
+
+  email.toLowerCase();
+
+  const hashedPassword = await bcrypt.hash(
+    password,
+    parseInt(process.env.SALTROUND)
+  );
 
   const result = await db.query(
     `INSERT INTO users
       (first_name, last_name, user_name, phone, email, password, address, verified) 
       VALUES 
       (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [firstName, lastName, userName, phone, email, password, address, verified]
+    [firstName, lastName, userName, phone, email, hashedPassword, address, 0]
   );
   const targetedUser: any = await db.query(
     "SELECT ID FROM users WHERE email=?",
@@ -38,34 +45,39 @@ async function CreateUser(req: Request) {
     [token, ID]
   );
 
-  let message = "Error in creating user";
+  let data: any = "Error in creating user";
 
   if (result.affectedRows && tokenInsert.affectedRows) {
-    message = "success";
+    data = { message: "success", token, userName };
   }
 
-  return { message };
+  return { data };
 }
 
 async function LogUserIn(req: Request) {
   const { email, password }: UserModelLogin = req.body;
 
-  const result = await db.query(
+  email.toLowerCase();
+
+  const user = await db.query(
     `
-  SELECT * FROM users WHERE email = ? AND password = ?`,
-    [email, password]
+  SELECT * FROM users WHERE email = ?`,
+    [email]
   );
-  let message = "Error in login user";
+  let message: any = new error();
 
-  if (result) {
-    console.log(result);
-
-    const token = await jwtCreate(result[0].ID);
-    return {
-      token: token,
-      message: "success",
-    };
+  if (user) {
+    const verifyPassword = await bcrypt.compare(password, user[0].password);
+    if (verifyPassword) {
+      const token = await jwtCreate(user[0].ID);
+      return {
+        token,
+        userName: user[0].user_name,
+        message: "success",
+      };
+    }
   }
+
   return { message };
 }
 

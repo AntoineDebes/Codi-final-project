@@ -15,8 +15,6 @@ export class ProductController {
     }
   }
   async add(request: Request, response: Response, next: NextFunction) {
-    console.log("passed");
-
     try {
       return response
         .status(200)
