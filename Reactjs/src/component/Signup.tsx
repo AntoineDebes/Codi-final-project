@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import ApiErrorHandling from "../API/ApiErrorHandling";
 import Api from "../API";
 import {
   UserRegisterModel,
@@ -50,11 +49,8 @@ function Signup() {
         console.log(res);
       })
       .catch((err) => {
-        ApiErrorHandling({
-          errorResponse: err.response.data.message,
-          setResponseErrorMessage,
-        });
-        console.log(err.response.data);
+        const errorMessage = err.response.data;
+        setResponseErrorMessage(errorMessage);
       });
   };
   return (

@@ -1,14 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import UserCrud from "../service/UserService";
+import UserRegisterErrorHandling from "../error/UserErrorHandling";
 
 export class UserController {
   async register(request: Request, response: Response, next: NextFunction) {
     try {
       return response.status(200).json(await UserCrud.CreateUser(request));
     } catch (error) {
-      return response.status(403).json({
-        message: error.message,
-      });
+      return response.status(403).json(UserRegisterErrorHandling({ error }));
     }
   }
   async login(request: Request, response: Response, next: NextFunction) {

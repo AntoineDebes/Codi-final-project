@@ -5,9 +5,9 @@ import Signup from "../component/Signup";
 function Homepage(): JSX.Element {
   return (
     <div className="wrapper__navbar__footer">
-      {/* <NavbarComponent /> */}
+      <NavbarComponent />
       {/* <Signin /> */}
-      <Signup />
+      {/* <Signup /> */}
     </div>
   );
 }
