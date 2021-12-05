@@ -1,20 +1,29 @@
+import { useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 function NavbarComponent() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="navbar__container--before">
+      <Navbar bg="light" expand="sm" className="navbar__container">
+        <Container>
+          <Navbar.Brand href="/">LOGO</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto navbar__container__links">
+              <Link to="/">Home</Link>
+              <Link to="/Products">Products</Link>
+              <Link to="#link">Link</Link>
+            </Nav>
+            <Nav className="navbar__container__links">
+              <Link to="/Signin">Register/Login</Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 }
 

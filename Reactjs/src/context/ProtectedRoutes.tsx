@@ -1,30 +1,11 @@
-import React from "react";
-import { Route, Navigate } from "react-router-dom";
-// import { useAuth } from "../IsAuth/IsAuthContext";
+import { Navigate, Outlet } from "react-router-dom";
+import { useIsAuthContext } from "../context/IsAuth";
 
-interface ProtectedRouteContext {
-  Component?: any;
-}
+function ProtectedRoute() {
+  const { isUserLogedIn } = useIsAuthContext();
+  console.log(isUserLogedIn);
 
-function ProtectedRoute({
-  Component,
-  ...rest
-}: ProtectedRouteContext): JSX.Element {
-  // const { isAuth } = useAuth();
-  let localstorage = localStorage.getItem("UserData");
-
-  return (
-    <Route
-    // {...rest}
-    // render={() => {
-    //   if (!localstorage) {
-    //     return <Component />;
-    //   } else {
-    //     return <Navigate to="/" />;
-    //   }
-    // }}
-    />
-  );
+  return isUserLogedIn ? <Outlet /> : <Navigate to="/" />;
 }
 
 export default ProtectedRoute;

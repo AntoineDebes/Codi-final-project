@@ -1,0 +1,21 @@
+.navbar__container--before {
+  position: relative;
+  height: 4rem;
+}
+
+.navbar__container {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 3.5rem;
+}
+
+.navbar__container__links {
+  gap: 1rem;
+}
+
+.navbar__container__links > * {
+  text-decoration: none;
+  color: black;
+}

@@ -1,0 +1,67 @@
+.wrapper__signin__container {
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.wrapper__signin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wrapper__signin__form__register__container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.4rem;
+}
+
+.wrapper__signin__form > div:not(.wrapper__signin__form__register__container) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.wrapper__signin__form input {
+  border: none;
+  border-radius: 4px;
+}
+
+.wrapper__signin__form input:focus {
+  outline: none;
+}
+
+.wrapper__signin__form__input__container {
+  max-width: 100%;
+  padding: 1rem;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  );
+  padding: 2px 3px;
+  border-radius: 6px;
+}
+
+.wrapper__signin__form > button {
+  border: none;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  );
+  color: white;
+  padding: 0.3rem 0;
+  width: 80%;
+  align-self: center;
+}
+
+.gradient-color-link {
+  background: -webkit-linear-gradient(var(--primary-color), rgb(163, 116, 163));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

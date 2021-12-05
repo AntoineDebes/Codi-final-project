@@ -1,17 +1,17 @@
+import express, { json, Request, Response } from "express";
 import { ProductRoutes } from "./routes/ProductRoutes";
-import * as express from "express";
-import { json, Request, Response } from "express";
-import * as bodyParser from "body-parser";
+import swaggerUI from "swagger-ui-express";
 import "dotenv/config";
 import { UserRoutes } from "./routes/UserRoutes";
 import { RouteModelServer } from "./entity/RoutesModel";
+import * as swaggerDocs from "../swagger.json";
+import cors from "cors";
 
-const app = express.default();
-var cors = require("cors");
-const port = process.env.Port || 8080;
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use(json());
 app.use(cors());
 
 UserRoutes.forEach((route: RouteModelServer) => {
@@ -62,6 +62,6 @@ ProductRoutes.forEach((route: RouteModelServer) => {
     }
   );
 });
-app.listen(port, () => {
-  console.log(`The server is listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`The server is listening on port ${PORT}`);
 });

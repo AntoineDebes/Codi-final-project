@@ -1,15 +1,25 @@
+:root {
+  --primary-color: purple;
+}
+
 .wrapper {
   min-height: 100vh;
   height: 100%;
 }
 
-.wrapper__navbar__footer {
+.wrapper__container {
   height: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
+  padding: 0.5rem 1rem;
 }
 
 .wrapper__navbar__footer > * {
   grid-column: 1 / -1;
+}
+
+.links--dom {
+  text-decoration: none;
+  color: black;
 }
