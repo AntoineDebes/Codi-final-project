@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   z-index: 10;
+  animation: anvil 0.3s;
 }
 
 .wrapper__signin__container::before {
@@ -102,4 +103,16 @@
   background: -webkit-linear-gradient(var(--primary-color), rgb(163, 116, 163));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes anvil {
+  0% {
+    opacity: 0;
+    position: fixed;
+  }
+
+  100% {
+    opacity: 1;
+    position: fixed;
+  }
 }

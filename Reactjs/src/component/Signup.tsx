@@ -49,11 +49,13 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
     };
     Api({
       method: "post",
-      fetchApiUrl: "users",
+      fetchApiUrl: "userRegister",
       data: params,
     })
       .then((res: any) => {
-        console.log(res);
+        if (res.status === 200) {
+          setIsLoginOpen(false);
+        }
       })
       .catch((err) => {
         const errorMessage = err.response.data;
@@ -70,13 +72,13 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
         className="wrapper__form__go-back__btn"
         onClick={() => setIsRegisterOpen(false)}
       >
-        B
+        <i className="fas fa-long-arrow-alt-left" />
       </div>
       <div
         className="wrapper__form__go-exit__btn"
         onClick={() => setIsLoginOpen(false)}
       >
-        X
+        <i className="fas fa-times" />
       </div>
       <div>
         <div>

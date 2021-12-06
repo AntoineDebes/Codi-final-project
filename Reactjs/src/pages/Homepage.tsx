@@ -20,7 +20,7 @@ function Homepage(): JSX.Element {
             alt="Second slide"
           />
 
-          <Carousel.Caption>
+          <Carousel.Caption className="Carousel__caption__hero">
             <h3>Second slide label</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>

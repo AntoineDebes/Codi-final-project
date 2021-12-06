@@ -31,8 +31,11 @@ function Signin({ setIsLoginOpen }: SigninProps) {
       password: data.password,
     };
     API({ method: "post", fetchApiUrl: "userLogin", data: params }).then(
-      (res) => {
-        console.log(res);
+      (res: any) => {
+        if (res.status === 200) {
+          localStorage.setItem("userCredentials", res.data);
+          setIsLoginOpen(false);
+        }
       }
     );
   };
@@ -55,7 +58,7 @@ function Signin({ setIsLoginOpen }: SigninProps) {
               className="wrapper__form__go-exit__btn"
               onClick={() => setIsLoginOpen(false)}
             >
-              X
+              <i className="fas fa-times" />
             </div>
             <div>
               <label>Email address</label>
@@ -89,14 +92,14 @@ function Signin({ setIsLoginOpen }: SigninProps) {
             </div>
             <div className="wrapper__signin__form__register__container">
               <p>Don't have an account? </p>
-              <button
+              <p
                 onClick={() => setIsRegisterOpen(true)}
                 className="links--dom gradient-color-link"
               >
                 Register
-              </button>
+              </p>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
           </form>
         )}
       </div>
