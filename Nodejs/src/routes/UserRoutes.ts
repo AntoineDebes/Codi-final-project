@@ -11,7 +11,7 @@ export const UserRoutes = [
   },
   {
     method: "post",
-    route: "/users",
+    route: "/userRegister",
     controller: UserController,
     action: "register",
   },

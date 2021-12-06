@@ -5,6 +5,7 @@
 .wrapper {
   min-height: 100vh;
   height: 100%;
+  position: relative;
 }
 
 .wrapper__container {

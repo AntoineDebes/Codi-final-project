@@ -177,3 +177,10 @@ template {
 [hidden] {
   display: none;
 }
+
+/** Antoine Debes costume CSS */
+
+p {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}

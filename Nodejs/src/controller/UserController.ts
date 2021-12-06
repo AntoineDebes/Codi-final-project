@@ -7,6 +7,8 @@ export class UserController {
     try {
       return response.status(200).json(await UserCrud.CreateUser(request));
     } catch (error) {
+      console.log(error);
+
       return response.status(403).json(UserRegisterErrorHandling({ error }));
     }
   }

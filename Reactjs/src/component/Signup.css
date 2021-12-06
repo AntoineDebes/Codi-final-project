@@ -1,0 +1,15 @@
+.wrapper__signup__form {
+  position: relative;
+}
+
+.wrapper__form__go-back__btn {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.wrapper__form__go-exit__btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

@@ -3,8 +3,8 @@ import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
 import { error } from "console";
-const db = require("./db");
-const bcrypt = require("bcrypt");
+import query from "./db";
+import bcrypt from "bcrypt";
 
 async function CreateUser(req: Request) {
   const {
@@ -24,21 +24,20 @@ async function CreateUser(req: Request) {
     parseInt(process.env.SALTROUND)
   );
 
-  const result = await db.query(
+  const result = await query(
     `INSERT INTO users
       (first_name, last_name, user_name, phone, email, password, address, verified) 
       VALUES 
       (?, ?, ?, ?, ?, ?, ?, ?)`,
     [firstName, lastName, userName, phone, email, hashedPassword, address, 0]
   );
-  const targetedUser: any = await db.query(
-    "SELECT ID FROM users WHERE email=?",
-    [email]
-  );
+  const targetedUser: any = await query("SELECT ID FROM users WHERE email=?", [
+    email,
+  ]);
   const ID = targetedUser[0].ID;
   const token = await jwtCreate(ID);
 
-  const tokenInsert = await db.query(
+  const tokenInsert = await query(
     `UPDATE users 
     SET token=? 
     WHERE ID=?`,
@@ -59,7 +58,7 @@ async function LogUserIn(req: Request) {
 
   email.toLowerCase();
 
-  const user = await db.query(
+  const user = await query(
     `
   SELECT * FROM users WHERE email = ?`,
     [email]
@@ -83,7 +82,7 @@ async function LogUserIn(req: Request) {
 
 async function EmailVerification(req: GetUserAuthInfoRequest) {
   const { userID } = req;
-  const result = await db.query(
+  const result = await query(
     `UPDATE users 
     SET verified=? 
     WHERE ID=?`,
@@ -102,7 +101,7 @@ async function EmailVerification(req: GetUserAuthInfoRequest) {
 async function deleteUser(req: GetUserAuthInfoRequest) {
   const { userID } = req;
 
-  const result = await db.query(`DELETE FROM users WHERE ID=?`, [userID]);
+  const result = await query(`DELETE FROM users WHERE ID=?`, [userID]);
   let message = "Error in deleting your profile";
 
   if (result.affectedRows) {

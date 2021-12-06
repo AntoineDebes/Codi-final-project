@@ -6,8 +6,7 @@ import {
 import NavbarComponent from "../component/Navbar";
 import ProtectedRoute from "../context/ProtectedRoutes";
 import Homepage from "../pages/Homepage";
-import Signin from "./Signin";
-import Signup from "./Signup";
+import Products from "../pages/Products";
 
 function Routes() {
   return (
@@ -15,9 +14,8 @@ function Routes() {
       <NavbarComponent />
       <ReactRoutes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/products" element={<Products />} />
         <Route element={<ProtectedRoute />}></Route>
-        <Route path="/signup" element={<Signup />} />
       </ReactRoutes>
     </Router>
   );

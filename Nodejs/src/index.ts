@@ -31,7 +31,7 @@ UserRoutes.forEach((route: RouteModelServer) => {
               ? res.send(result)
               : undefined
           )
-          .catch((err) => next());
+          .catch(() => next());
       } else if (result !== null && result !== undefined) {
         return res.json(result);
       }
@@ -55,7 +55,7 @@ ProductRoutes.forEach((route: RouteModelServer) => {
               ? res.send(result)
               : undefined
           )
-          .catch((err) => next());
+          .catch(() => next());
       } else if (result !== null && result !== undefined) {
         return res.json(result);
       }
