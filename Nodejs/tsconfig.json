@@ -13,6 +13,9 @@
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
     "preserveConstEnums": true,
-    "allowUnreachableCode": true
+    "allowUnreachableCode": true,
+
+    "moduleResolution": "node",
+    "sourceMap": true,
   }
 }

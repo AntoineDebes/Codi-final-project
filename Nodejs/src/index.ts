@@ -1,4 +1,4 @@
-import express, { json, Request, Response } from "express";
+import express, { json, Request, Response, urlencoded } from "express";
 import { ProductRoutes } from "./routes/ProductRoutes";
 import swaggerUI from "swagger-ui-express";
 import "dotenv/config";
@@ -6,13 +6,15 @@ import { UserRoutes } from "./routes/UserRoutes";
 import { RouteModelServer } from "./entity/RoutesModel";
 import * as swaggerDocs from "../swagger.json";
 import cors from "cors";
-
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-app.use(json());
+app.use(urlencoded({ extended: true }));
+app.use(json({ limit: "50mb" }));
 app.use(cors());
+
+const Routes = [UserRoutes, ProductRoutes];
 
 UserRoutes.forEach((route: RouteModelServer) => {
   (app as any)[route.method](
@@ -48,6 +50,7 @@ ProductRoutes.forEach((route: RouteModelServer) => {
         res,
         next
       );
+
       if (result instanceof Promise) {
         return result
           .then((result) =>

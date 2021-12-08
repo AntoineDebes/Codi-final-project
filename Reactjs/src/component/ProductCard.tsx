@@ -1,3 +1,5 @@
+import "./ProductCard.css";
+
 interface ProductCardProps {
   image: string;
   imageAlt: string;

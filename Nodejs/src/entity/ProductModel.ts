@@ -1,8 +1,10 @@
 export interface ProductModel {
   name: string;
   serialNumber: string;
-  price: number;
-  quantity: number;
-  packaging: number;
-  transport: number;
+  price: string;
+  quantity: string;
+  packaging: string;
+  transport: string;
+  base64: string;
+  imageFormat: string;
 }

@@ -6,14 +6,14 @@
 }
 
 .wrapper__container__hero__container > *:not(.wrapper__container__hero) {
-  max-width: 1320px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .wrapper__container__hero {
   grid-column: 1 /-1;
   width: 100%;
-  max-width: 1920px;
+  max-width: var(--hero-width);
   margin: 0 auto;
 }
 
@@ -26,4 +26,18 @@
   top: 50%;
   left: 25%;
   transform: translate(-50%, -50%);
+}
+
+.wrapper__container__hompage__hot-sales {
+  grid-column: 1 /-1;
+  text-align: center;
+}
+
+.wrapper__container__homepage__hot-sales__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 340px));
+  place-content: center;
+  grid-template-rows: auto;
+  gap: 1.5rem;
+  grid-column: 1 /-1;
 }

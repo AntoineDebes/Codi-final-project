@@ -8,10 +8,9 @@ export class ProductController {
         .status(200)
         .json(await ProductCrud.GetAllProduct(request));
     } catch (error) {
-      return {
+      return response.status(403).json({
         message: error.message,
-        status: 500,
-      };
+      });
     }
   }
   async add(request: Request, response: Response, next: NextFunction) {
@@ -20,10 +19,9 @@ export class ProductController {
         .status(200)
         .json(await ProductCrud.CreateProduct(request));
     } catch (error) {
-      return {
+      return response.status(403).json({
         message: error.message,
-        status: 500,
-      };
+      });
     }
   }
   async delete(request: Request, response: Response, next: NextFunction) {
@@ -32,10 +30,9 @@ export class ProductController {
         .status(200)
         .json(await ProductCrud.DeleteProduct(request));
     } catch (error) {
-      return {
-        message: { error },
-        status: 500,
-      };
+      return response.status(403).json({
+        message: error.message,
+      });
     }
   }
 }

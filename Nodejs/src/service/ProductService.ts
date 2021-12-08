@@ -1,10 +1,10 @@
 import { Request } from "express";
 import { GetProductInfoRequest } from "../entity/Request";
 import { ProductModel } from "../entity/ProductModel";
-const db = require("./db");
+import query from "./db";
 
 async function GetAllProduct(req: Request) {
-  const result = await db.query(`SELECT * FROM product`);
+  const result = await query(`SELECT * FROM product`);
   let message = "Error in getting the products";
   if (result) message = result;
   return { message };
@@ -18,14 +18,26 @@ async function CreateProduct(req: Request) {
     quantity,
     packaging,
     transport,
+    base64,
+    imageFormat,
   }: ProductModel = req.body;
+  // console.log(name, serialNumber, price, quantity, packaging, transport);
 
-  const result = await db.query(
+  const result = await query(
     `INSERT INTO product
-      (name, serial_number, price, quantity, packaging, transport) 
+      (name, serial_number, price, quantity, packaging, transport, Base64, ImageFormat) 
       VALUES 
-      (?, ?, ?, ?, ?, ?)`,
-    [name, serialNumber, price, quantity, packaging, transport]
+      (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      name,
+      serialNumber,
+      price,
+      quantity,
+      packaging,
+      transport,
+      base64,
+      imageFormat,
+    ]
   );
 
   let message = "Error in creating product";
@@ -40,7 +52,7 @@ async function CreateProduct(req: Request) {
 async function DeleteProduct(req: GetProductInfoRequest) {
   const { productID } = req;
 
-  const result = await db.query(`DELETE FROM product WHERE ID=?`, [productID]);
+  const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
   let message = "Error in deleting your product";
 
   if (result.affectedRows) {

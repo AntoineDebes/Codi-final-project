@@ -1,5 +1,7 @@
 :root {
   --primary-color: purple;
+  --max-width: 1360px;
+  --hero-width: 1920px;
 }
 
 .wrapper {
@@ -14,6 +16,8 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
   padding: 0.5rem 1rem;
+  margin: 0 auto;
+  max-width: var(--max-width);
 }
 
 .wrapper__navbar__footer > * {
