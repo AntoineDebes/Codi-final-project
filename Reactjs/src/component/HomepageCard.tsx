@@ -1,7 +1,7 @@
 import "./HomepageCard.css";
 
 interface HomepageCardProps {
-  image: string;
+  image: any;
   imageAlt: string;
   title: string;
   content: string;

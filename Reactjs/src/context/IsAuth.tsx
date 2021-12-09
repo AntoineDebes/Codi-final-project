@@ -1,7 +1,7 @@
 import { useState, useContext, createContext } from "react";
 interface isAuthContextProps {
-  isUserLogedIn?: boolean;
-  setIsUserLogedIn?: Function;
+  isUserLogedIn?: any;
+  setIsUserLogedIn?: any;
 }
 
 const IsAuthContext = createContext<isAuthContextProps>({}); // We created a context
@@ -11,7 +11,9 @@ export function useIsAuthContext() {
 }
 
 export function IsAuthContextProvider({ children }: any) {
-  const [isUserLogedIn, setIsUserLogedIn] = useState(false);
+  let isUserAuth = !!localStorage.getItem("isUserAuth") ?? false;
+
+  const [isUserLogedIn, setIsUserLogedIn] = useState(isUserAuth);
 
   return (
     <>

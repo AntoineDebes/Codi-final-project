@@ -6,7 +6,7 @@ import query from "./db";
 async function GetAllProduct(req: Request) {
   const result = await query(`SELECT * FROM product`);
   let message = "Error in getting the products";
-  if (result) message = result;
+  if (result) return (message = result);
   return { message };
 }
 
@@ -20,14 +20,16 @@ async function CreateProduct(req: Request) {
     transport,
     base64,
     imageFormat,
+    productPlacement,
+    content,
   }: ProductModel = req.body;
   // console.log(name, serialNumber, price, quantity, packaging, transport);
 
   const result = await query(
     `INSERT INTO product
-      (name, serial_number, price, quantity, packaging, transport, Base64, ImageFormat) 
+      (name, serial_number, price, quantity, packaging, transport, Base64, ImageFormat, productPlacement, content) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, ?, ?)`,
+      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       name,
       serialNumber,
@@ -37,6 +39,8 @@ async function CreateProduct(req: Request) {
       transport,
       base64,
       imageFormat,
+      productPlacement,
+      content,
     ]
   );
 

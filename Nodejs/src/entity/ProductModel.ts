@@ -7,4 +7,6 @@ export interface ProductModel {
   transport: string;
   base64: string;
   imageFormat: string;
+  productPlacement: string;
+  content: string;
 }

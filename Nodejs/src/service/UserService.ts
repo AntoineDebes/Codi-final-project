@@ -58,12 +58,16 @@ async function LogUserIn(req: Request) {
 
   email.toLowerCase();
 
+  console.log(email, password);
+
   const user = await query(
     `
   SELECT * FROM users WHERE email = ?`,
     [email]
   );
-  let message: any = new error();
+  console.log("hey");
+
+  let message: any = new Error();
 
   if (user) {
     const verifyPassword = await bcrypt.compare(password, user[0].password);
@@ -76,6 +80,7 @@ async function LogUserIn(req: Request) {
       };
     }
   }
+  console.log(user[0], "user[0]");
 
   return { message };
 }

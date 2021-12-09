@@ -5,5 +5,7 @@ export type AdminProductModel = {
   quantity: string;
   packaging: string;
   transport: string;
+  productPlacement: string;
+  description: string;
   Image?: string;
 };

@@ -4,6 +4,7 @@ import "./Signin.css";
 import API from "../API";
 import Signup from "./Signup";
 import { useClickOutside } from "../context/ClickOutside";
+import { useIsAuthContext } from "../context/IsAuth";
 
 interface UserLoginModel {
   email: string;
@@ -14,6 +15,8 @@ interface SigninProps {
 }
 
 function Signin({ setIsLoginOpen }: SigninProps) {
+  const { setIsUserLogedIn } = useIsAuthContext();
+
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const {
     register,
@@ -33,7 +36,10 @@ function Signin({ setIsLoginOpen }: SigninProps) {
     API({ method: "post", fetchApiUrl: "userLogin", data: params }).then(
       (res: any) => {
         if (res.status === 200) {
-          localStorage.setItem("userCredentials", res.data);
+          localStorage.setItem("Token", res.data.token);
+          localStorage.setItem("Username", res.data.userName);
+          localStorage.setItem("isUserAuth", "true");
+          setIsUserLogedIn(true);
           setIsLoginOpen(false);
         }
       }

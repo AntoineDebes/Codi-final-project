@@ -1,10 +1,26 @@
+import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import "./Homepage.css";
 import { HeroImageOne } from "../images";
 import HomepageCard from "../component/HomepageCard";
 import { Toshiba } from "../images";
+import Api from "../API";
 
 function Homepage(): JSX.Element {
+  const [cards, setCards] = useState<any>(undefined);
+
+  useEffect(() => {
+    Api({ method: "GET", fetchApiUrl: "products" }).then((res: any) => {
+      console.log(res);
+
+      setCards(res.data);
+    });
+  }, []);
+  // var image = new Image();
+  // image.src = repot.ImageFormat+"," + repot.Base64;
+  // var w:any = window.open("");
+  // w.document.write(image.outerHTML);
+
   return (
     <>
       <div className="wrapper__container__hero__container">
@@ -51,62 +67,18 @@ function Homepage(): JSX.Element {
       <div className="wrapper__container">
         <div className="wrapper__container__hompage__hot-sales">Hot Sales</div>
         <div className="wrapper__container__homepage__hot-sales__container">
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
-          <HomepageCard
-            content="toshiba"
-            image={Toshiba}
-            imageAlt="tesT"
-            price="123"
-            title="sexy"
-          />
+          {cards &&
+            cards.map((card: any) => {
+              return (
+                <HomepageCard
+                  content={card.content}
+                  image={`${card.ImageFormat},${card.Base64}`}
+                  imageAlt=""
+                  price={card.price}
+                  title={card.name}
+                />
+              );
+            })}
         </div>
       </div>
     </>
