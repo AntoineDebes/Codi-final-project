@@ -1,4 +1,4 @@
-import express, { json, Request, Response, urlencoded } from "express";
+import express, { json, Request, Response, Router, urlencoded } from "express";
 import { ProductRoutes } from "./routes/ProductRoutes";
 import swaggerUI from "swagger-ui-express";
 import "dotenv/config";
@@ -11,60 +11,34 @@ const PORT = process.env.PORT || 8080;
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(urlencoded({ extended: true }));
-app.use(json({ limit: "50mb" }));
+app.use(json({ limit: "10mb" }));
 app.use(cors());
 
-const Routes = [UserRoutes, ProductRoutes];
+const Routers = [UserRoutes, ProductRoutes];
 
-UserRoutes.forEach((route: RouteModelServer) => {
-  (app as any)[route.method](
-    route.route,
-    route.middleware ?? [],
-    (req: Request, res: Response, next: Function) => {
-      const result = new (route.controller as any)()[route.action](
-        req,
-        res,
-        next
-      );
-      if (result instanceof Promise) {
-        return result
-          .then((result) =>
-            result !== null && result !== undefined
-              ? res.send(result)
-              : undefined
-          )
-          .catch(() => next());
-      } else if (result !== null && result !== undefined) {
-        return res.json(result);
+Routers.forEach((router: any) => {
+  router.forEach((route: RouteModelServer) => {
+    (app as any)[route.method](
+      route.route,
+      route.middleware ?? [],
+      (req: Request, res: Response, next: Function) => {
+        const result = new (route.controller as any)()[route.action](
+          req,
+          res,
+          next
+        );
+        if (result instanceof Promise) {
+          return result
+            .then((result) => (!!result ? res.send(result) : undefined))
+            .catch(() => next());
+        } else if (!!result) {
+          return res.json(result);
+        }
       }
-    }
-  );
+    );
+  });
 });
-ProductRoutes.forEach((route: RouteModelServer) => {
-  (app as any)[route.method](
-    route.route,
-    route.middleware ?? [],
-    (req: Request, res: Response, next: Function) => {
-      const result = new (route.controller as any)()[route.action](
-        req,
-        res,
-        next
-      );
 
-      if (result instanceof Promise) {
-        return result
-          .then((result) =>
-            result !== null && result !== undefined
-              ? res.send(result)
-              : undefined
-          )
-          .catch(() => next());
-      } else if (result !== null && result !== undefined) {
-        return res.json(result);
-      }
-    }
-  );
-});
 app.listen(PORT, () => {
   console.log(`The server is listening on port ${PORT}`);
 });

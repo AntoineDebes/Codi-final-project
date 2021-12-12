@@ -2,9 +2,10 @@ import Api from "../API";
 import { useState, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AdminProductModel } from "../Models/FormModels/AdminProduct.model";
+import "./AddProductPage.css";
 import { ToastContainer, toast } from "react-toastify";
 
-function ProductPage() {
+function AddProductPage() {
   const {
     register,
     handleSubmit,
@@ -14,13 +15,15 @@ function ProductPage() {
   const [image, setImage] = useState<any>();
   const [fileName, setFileName] = useState<string>("");
   const hiddenFileInput = useRef<any>(null);
-  const [productPlacement, setProductPlacement] = useState(1);
+  const [productPlacement, setProductPlacement] = useState(undefined);
   const handleSelectedChange = (event: any) => {
     setProductPlacement(event.target.value);
   };
   const notify = (msg: string) => toast(msg);
   const onSubmitHandler: SubmitHandler<AdminProductModel> = (data) => {
     if (image) {
+      console.log("passing");
+
       let params = {
         name: data.name,
         serialNumber: data.serial_number,
@@ -33,9 +36,14 @@ function ProductPage() {
         imageFormat: image?.Format ?? "",
         base64: image?.Base64 ?? "",
       };
+      console.log({ params });
+
       Api({ method: "POST", fetchApiUrl: "products", data: params }).then(
         (res: any) => {
+          console.log("test");
+
           reset();
+          setFileName("");
           notify("success");
         }
       );
@@ -76,12 +84,33 @@ function ProductPage() {
       <ToastContainer />
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
-        className="wrapper__signup__form"
+        className="wrapper__add--product__form"
       >
         <div>
           <div>
             <div>
-              <label>Product Name</label>
+              <label>Product Placement*</label>
+              <div className="wrapper__add--product__form__product__placement">
+                <select
+                  value={productPlacement}
+                  {...register("productPlacement", {
+                    required: true,
+                  })}
+                  onChange={handleSelectedChange}
+                >
+                  <option value="normal">Normal</option>
+                  <option value="hero">Hero Section</option>
+                  <option value="hot">Hot Sales</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              {errors.productPlacement && (
+                <span className="text-danger">This field is required</span>
+              )}
+            </div>
+            <div>
+              <label>Product Name*</label>
               <input type="text" {...register("name", { required: true })} />
             </div>
             <div>
@@ -90,10 +119,14 @@ function ProductPage() {
               )}
             </div>
             <div>
-              <label>Serial Number</label>
+              <label>
+                Serial Number{productPlacement !== "hero" ? "*" : ""}
+              </label>
               <input
                 type="text"
-                {...register("serial_number", { required: true })}
+                {...register("serial_number", {
+                  required: productPlacement === "hero" ? false : true,
+                })}
               />
             </div>
             <div>
@@ -102,11 +135,11 @@ function ProductPage() {
               )}
             </div>
             <div>
-              <label>Price</label>
+              <label>Price{productPlacement !== "hero" ? "*" : ""}</label>
               <input
                 type="text"
                 {...register("price", {
-                  required: true,
+                  required: productPlacement === "hero" ? false : true,
                   pattern: {
                     value: /^\d{1,}$/,
                     message: "Only Numbers are allowed",
@@ -123,12 +156,14 @@ function ProductPage() {
                 </span>
               )}
             </div>
+          </div>
+          <div>
             <div>
-              <label>Quantity</label>
+              <label>Quantity{productPlacement !== "hero" ? "*" : ""}</label>
               <input
                 type="text"
                 {...register("quantity", {
-                  required: true,
+                  required: productPlacement === "hero" ? false : true,
                   pattern: {
                     value: /^\d{1,}$/,
                     message: "Only Numbers are allowed",
@@ -145,14 +180,12 @@ function ProductPage() {
                 </span>
               )}
             </div>
-          </div>
-          <div>
             <div>
-              <label>Packaging</label>
+              <label>Packaging{productPlacement !== "hero" ? "*" : ""}</label>
               <input
                 type="text"
                 {...register("packaging", {
-                  required: true,
+                  required: productPlacement === "hero" ? false : true,
                   pattern: {
                     value: /^\d{1,}$/,
                     message: "Only Numbers are allowed",
@@ -170,11 +203,11 @@ function ProductPage() {
               )}
             </div>
             <div>
-              <label>Transport</label>
+              <label>Transport{productPlacement !== "hero" ? "*" : ""}</label>
               <input
                 type="text"
                 {...register("transport", {
-                  required: true,
+                  required: productPlacement === "hero" ? false : true,
                   pattern: {
                     value: /^\d{1,}$/,
                     message: "Only Numbers are allowed",
@@ -192,7 +225,7 @@ function ProductPage() {
               )}
             </div>
             <div>
-              <label>Description</label>
+              <label>Description*</label>
               <input
                 type="text"
                 {...register("description", {
@@ -205,43 +238,21 @@ function ProductPage() {
                 <span className="text-danger">This field is required</span>
               )}
             </div>
-            <div>
-              <label>Product Placement</label>
-              <select
-                value={productPlacement}
-                {...register("productPlacement", {
-                  required: true,
-                })}
-                onChange={handleSelectedChange}
-              >
-                <option value="normal">Normal</option>
-                <option value="hero">Hero Section</option>
-                <option value="hot">Hot Sales</option>
-              </select>
-            </div>
-            <div>
-              {errors.productPlacement && (
-                <span className="text-danger">This field is required</span>
-              )}
-            </div>
-            <div>
-              <button onClick={() => handleUploadClick()}>
-                Upload an Image
-              </button>
-              <span>{fileName}</span>
-            </div>
-            <div>
-              <label>Image</label>
-              <input
-                style={{ display: "none" }}
-                ref={hiddenFileInput}
-                accept="image/png, image/jpeg, image/webpg"
-                type="file"
-                name="inputFile"
-                onChange={(e) => FileUploadChange(e)}
-              />
-            </div>
           </div>
+        </div>
+        <div>
+          <button onClick={() => handleUploadClick()}>Upload an Image</button>
+          <span>{fileName}</span>
+        </div>
+        <div>
+          <input
+            style={{ display: "none" }}
+            ref={hiddenFileInput}
+            accept="image/png, image/jpeg, image/webp"
+            type="file"
+            name="inputFile"
+            onChange={(e) => FileUploadChange(e)}
+          />
         </div>
 
         <button type="submit">Submit</button>
@@ -249,4 +260,4 @@ function ProductPage() {
     </>
   );
 }
-export default ProductPage;
+export default AddProductPage;

@@ -1,0 +1,30 @@
+.wrapper__add--product__form {
+  display: flex;
+  min-height: 85vh;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wrapper__add--product__form > div {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.wrapper__add--product__form > div > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper__add--product__form__product__placement {
+  align-self: flex-end;
+  width: 100%;
+}
+
+.wrapper__add--product__form__product__placement > * {
+  width: 100%;
+}

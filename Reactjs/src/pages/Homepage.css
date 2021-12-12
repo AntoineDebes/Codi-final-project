@@ -35,7 +35,7 @@
 
 .wrapper__container__homepage__hot-sales__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 340px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 314px));
   place-content: center;
   grid-template-rows: auto;
   gap: 1.5rem;

@@ -29,6 +29,7 @@
   flex-direction: row;
   align-items: center;
   gap: 0.7rem;
+  color: unset;
 }
 .profile--icon {
   align-self: center;

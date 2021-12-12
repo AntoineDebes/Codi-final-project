@@ -1,21 +1,20 @@
 import "./HomepageCard.css";
+import { HomepageCardProps } from "../Models/DataModels/HomepageCardProps";
 
-interface HomepageCardProps {
-  image: any;
-  imageAlt: string;
-  title: string;
-  content: string;
-  price: string;
-}
-
-function HomepageCard({ image, imageAlt, title, price }: HomepageCardProps) {
+function HomepageCard({
+  ImageFormat,
+  Base64,
+  imageAlt,
+  name,
+  price,
+}: HomepageCardProps) {
   return (
     <div className="wrapper__container__homepage__cards">
       <div className="homepage__container__homepage__content">
-        <h3>{title}</h3>
+        <h3>{name}</h3>
       </div>
       <div className="homepage__container__cards__img__container">
-        <img src={image} alt={imageAlt} />
+        <img src={`${ImageFormat},${Base64}`} alt={imageAlt} />
         <p>{price}</p>
       </div>
     </div>

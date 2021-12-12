@@ -6,7 +6,26 @@ import query from "./db";
 async function GetAllProduct(req: Request) {
   const result = await query(`SELECT * FROM product`);
   let message = "Error in getting the products";
-  if (result) return (message = result);
+
+  let nestedObject: any = {
+    hero: [],
+    sales: [],
+    normal: [],
+  };
+
+  if (result) {
+    nestedObject.hero = result.filter((_product: any) => {
+      return _product.productPlacement === "hero";
+    });
+    nestedObject.sales = result.filter((_product: any) => {
+      return _product.productPlacement === "sales";
+    });
+    nestedObject.normal = result.filter((_product: any) => {
+      return _product.productPlacement === "normal";
+    });
+
+    return nestedObject;
+  }
   return { message };
 }
 

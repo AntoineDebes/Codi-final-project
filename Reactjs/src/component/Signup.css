@@ -13,3 +13,40 @@
   top: 5px;
   right: 5px;
 }
+
+.wrapper__signin__form__input__container > input:focus-visible {
+  outline: none;
+}
+
+.wrapper__signup__terms {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.button__submit__signup {
+  border: none;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  );
+  color: white;
+  padding: 0.3rem 0;
+  width: 80%;
+  align-self: center;
+}
+
+.button__submit__signup:disabled {
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  );
+  opacity: 0.4;
+}
+
+.wrapper__signup__terms > input {
+  cursor: pointer;
+}

@@ -2,7 +2,6 @@ import { jwtCreate } from "./../middleware/jwt";
 import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
-import { error } from "console";
 import query from "./db";
 import bcrypt from "bcrypt";
 

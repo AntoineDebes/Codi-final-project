@@ -19,6 +19,8 @@ export class ProductController {
         .status(200)
         .json(await ProductCrud.CreateProduct(request));
     } catch (error) {
+      console.log(error);
+
       return response.status(403).json({
         message: error.message,
       });

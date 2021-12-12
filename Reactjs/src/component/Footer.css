@@ -1,0 +1,13 @@
+.wrapper__footer {
+  width: 100%;
+  background-color: black;
+}
+
+.wrapper__footer__container {
+  width: 100%;
+  max-width: var(--max-width);
+  background-color: inherit;
+  color: var(--primary-color);
+  margin: 0 auto;
+  height: 10rem;
+}

@@ -38,9 +38,17 @@
   position: relative;
 }
 
-.wrapper__signin__container > form:not(.wrapper__signin__form) > div {
+.wrapper__signin__container
+  > form:not(.wrapper__signin__form)
+  > div:not(.wrapper__signup__terms) {
   display: flex;
   gap: 2rem;
+}
+
+.wrapper__signin__container > form:not(.wrapper__signin__form) > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .wrapper__signin__container
@@ -103,6 +111,11 @@
   background: -webkit-linear-gradient(var(--primary-color), rgb(163, 116, 163));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+i {
+  cursor: pointer;
 }
 
 @keyframes anvil {
