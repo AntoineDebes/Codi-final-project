@@ -33,8 +33,8 @@ function Signin({ setIsLoginOpen }: SigninProps) {
       email: data.email,
       password: data.password,
     };
-    API({ method: "post", fetchApiUrl: "userLogin", data: params }).then(
-      (res: any) => {
+    API({ method: "post", fetchApiUrl: "userLogin", data: params })
+      .then((res: any) => {
         if (res.status === 200) {
           localStorage.setItem("Token", res.data.token);
           localStorage.setItem("Username", res.data.userName);
@@ -42,8 +42,8 @@ function Signin({ setIsLoginOpen }: SigninProps) {
           setIsUserLogedIn(true);
           setIsLoginOpen(false);
         }
-      }
-    );
+      })
+      .catch((err: any) => {});
   };
   return (
     <>

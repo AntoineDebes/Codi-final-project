@@ -13,11 +13,11 @@ export class UserController {
     }
   }
   async login(request: Request, response: Response, next: NextFunction) {
-    console.log("request.body", request.body);
-
     try {
       return response.status(200).json(await UserCrud.LogUserIn(request));
     } catch (error) {
+      console.log(error);
+
       return response.status(401).json({
         message: "invalid Username or Password",
       });
@@ -37,11 +37,15 @@ export class UserController {
     response: Response,
     next: NextFunction
   ) {
+    console.log("test");
+
     try {
       return response
         .status(200)
         .json(await UserCrud.EmailVerification(request));
     } catch (error) {
+      console.log(error);
+
       return {
         message: "invalid token",
         status: 401,

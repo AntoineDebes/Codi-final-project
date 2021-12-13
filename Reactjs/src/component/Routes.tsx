@@ -9,6 +9,7 @@ import NavbarComponent from "../component/Navbar";
 import ProtectedRoute from "../context/ProtectedRoutes";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/Products";
+import EmailVerification from "./EmailVerification";
 
 function Routes() {
   return (
@@ -20,6 +21,10 @@ function Routes() {
         <Route path="/addadminproducts" element={<AddProductPage />} />
         <Route path="/productupdateremove" element={<ProductUpdateRemove />} />
         <Route element={<ProtectedRoute />}></Route>
+        <Route
+          path="/verifyemail/:authtoken"
+          element={<EmailVerification />}
+        ></Route>
       </ReactRoutes>
     </Router>
   );
