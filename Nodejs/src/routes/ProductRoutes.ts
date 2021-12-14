@@ -11,12 +11,14 @@ export const ProductRoutes = [
   {
     method: "post",
     route: "/products",
+    middleware: [jwtVerify],
     controller: ProductController,
     action: "add",
   },
   {
     method: "delete",
     route: "/products",
+    middleware: [jwtVerify],
     controller: ProductController,
     action: "delete",
   },

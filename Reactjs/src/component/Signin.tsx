@@ -5,6 +5,7 @@ import API from "../API";
 import Signup from "./Signup";
 import { useClickOutside } from "../context/ClickOutside";
 import { useIsAuthContext } from "../context/IsAuth";
+import { toast } from "react-toastify";
 
 interface UserLoginModel {
   email: string;
@@ -16,7 +17,6 @@ interface SigninProps {
 
 function Signin({ setIsLoginOpen }: SigninProps) {
   const { setIsUserLogedIn } = useIsAuthContext();
-
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const {
     register,
@@ -43,7 +43,9 @@ function Signin({ setIsLoginOpen }: SigninProps) {
           setIsLoginOpen(false);
         }
       })
-      .catch((err: any) => {});
+      .catch((err: any) => {
+        toast(err.response.data.message);
+      });
   };
   return (
     <>

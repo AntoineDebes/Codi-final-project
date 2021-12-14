@@ -1,11 +1,10 @@
 import { jwtCreate } from "./../middleware/jwt";
-import { Request } from "express";
+import { Request, NextFunction } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
 import query from "./db";
 import bcrypt from "bcrypt";
 import { nodemailerEmailVerification } from "./Nodemailer";
-import { error } from "console";
 
 async function CreateUser(req: Request) {
   const {
@@ -42,14 +41,14 @@ async function CreateUser(req: Request) {
     `UPDATE users 
     SET token=? 
     WHERE ID=?`,
-    [token, ID]
+    [token, ID] 
   );
 
   let data: any = "Error in creating user";
 
   if (result.affectedRows && tokenInsert.affectedRows) {
     await nodemailerEmailVerification({ email, token });
-    data = { message: "success", token, userName };
+    data = { message: "success" };
   }
 
   return { data };
@@ -66,12 +65,13 @@ async function LogUserIn(req: Request) {
     [email]
   );
   const user = users[0];
-  let message: any = new Error();
 
   if (user.verified !== 1) {
-    return {
-      message: "Please check your email for verification",
-    };
+    // return {
+    //   message: "Please check your email for verification",
+    // };
+
+    throw new Error("Please check your email for verfication");
   } else if (!!user) {
     const verifyPassword = await bcrypt.compare(password, user.password);
     if (verifyPassword) {
@@ -83,7 +83,7 @@ async function LogUserIn(req: Request) {
       };
     }
   }
-  return { message };
+  throw new Error("Invalid username or password");
 }
 
 async function EmailVerification(req: GetUserAuthInfoRequest) {

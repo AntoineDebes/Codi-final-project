@@ -39,3 +39,10 @@
 #basic-navbar-nav {
   gap: 0.5rem;
 }
+
+/*
+Fucking with the bootstrap css config
+*/
+.nav-item.show.dropdown > .dropdown-menu.show {
+  width: 100%;
+}

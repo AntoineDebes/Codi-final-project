@@ -1,0 +1,11 @@
+.email__verification__container {
+  background-color: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: max-content;
+  padding: 2rem;
+  z-index: 10;
+}

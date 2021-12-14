@@ -19,7 +19,7 @@ export class UserController {
       console.log(error);
 
       return response.status(401).json({
-        message: "invalid Username or Password",
+        message: error.message,
       });
     }
   }
