@@ -5,6 +5,7 @@ import API from "../API";
 import Signup from "./Signup";
 import { useClickOutside } from "../context/ClickOutside";
 import { useIsAuthContext } from "../context/IsAuth";
+import { toast } from "react-toastify";
 
 interface UserLoginModel {
   email: string;
@@ -16,7 +17,6 @@ interface SigninProps {
 
 function Signin({ setIsLoginOpen }: SigninProps) {
   const { setIsUserLogedIn } = useIsAuthContext();
-
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const {
     register,
@@ -33,8 +33,8 @@ function Signin({ setIsLoginOpen }: SigninProps) {
       email: data.email,
       password: data.password,
     };
-    API({ method: "post", fetchApiUrl: "userLogin", data: params }).then(
-      (res: any) => {
+    API({ method: "post", fetchApiUrl: "userLogin", data: params })
+      .then((res: any) => {
         if (res.status === 200) {
           localStorage.setItem("Token", res.data.token);
           localStorage.setItem("Username", res.data.userName);
@@ -42,8 +42,10 @@ function Signin({ setIsLoginOpen }: SigninProps) {
           setIsUserLogedIn(true);
           setIsLoginOpen(false);
         }
-      }
-    );
+      })
+      .catch((err: any) => {
+        toast(err.response.data.message);
+      });
   };
   return (
     <>

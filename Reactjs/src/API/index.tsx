@@ -5,20 +5,22 @@ interface ApiProps {
   fetchApiUrl: string;
   data?: any;
   params?: any;
+  tokenProp?: any;
 }
 
-function Api({ method, fetchApiUrl, data, params }: ApiProps) {
-  const token = localStorage.getItem("login") ?? "";
+function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
+  const token = tokenProp || localStorage.getItem("login") || "";
 
   return new Promise((res, rej) => {
     Axios({
       method, // Method like GET, POST, DELETE, PUT ...
       url: `${process.env.REACT_APP_API_URL}${fetchApiUrl}`,
       headers: {
-        Authorization: token, // sending the token for the verification
+        "auth-token": token, // sending the token for the verification
       },
       data, // data passed
       params,
+      timeout: 5000,
     })
       .then((response) => {
         console.log(response);

@@ -6,6 +6,7 @@ import {
   ResponseErrorMessageModel,
 } from "../Models/FormModels/Signup.model";
 import "./Signup.css";
+import RegisterVerification from "../component/RegisterVerification";
 
 interface SignupProps {
   setIsRegisterOpen: Function;
@@ -16,6 +17,7 @@ interface SignupProps {
 function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
   const [conditionAndTermsAgree, setConditionAndTermsAgree] =
     useState<boolean>(false);
+  const [isEmailVerificationOpen, setIsEmailVerificationOpen] = useState(false);
 
   const [
     { userNameDuplicate, phoneDuplicate, emailDuplicate },
@@ -54,15 +56,20 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
     })
       .then((res: any) => {
         if (res.status === 200) {
-          setIsLoginOpen(false);
+          // setIsLoginOpen(false);
+          setIsEmailVerificationOpen(true);
         }
+        setTimeout(() => {
+          setIsRegisterOpen(false);
+          setIsEmailVerificationOpen(false);
+        }, 10000);
       })
       .catch((err) => {
         const errorMessage = err.response.data;
         setResponseErrorMessage(errorMessage);
       });
   };
-  return (
+  return !isEmailVerificationOpen ? (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="wrapper__signup__form"
@@ -263,6 +270,8 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
         Submit
       </button>
     </form>
+  ) : (
+    <RegisterVerification setIsLoginOpen={setIsLoginOpen} />
   );
 }
 

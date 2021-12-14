@@ -4,7 +4,7 @@ import { UserController } from "../controller/UserController";
 export const UserRoutes = [
   {
     method: "post",
-    route: "/EmailVerification",
+    route: "/emailverification",
     middleware: [jwtVerify],
     controller: UserController,
     action: "EmailVerification",

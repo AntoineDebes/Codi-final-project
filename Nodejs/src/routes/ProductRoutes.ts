@@ -11,6 +11,7 @@ export const ProductRoutes = [
   {
     method: "post",
     route: "/products",
+    middleware: [jwtVerify],
     controller: ProductController,
     action: "add",
   },

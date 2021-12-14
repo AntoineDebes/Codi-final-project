@@ -1,6 +1,6 @@
 .navbar__container--before {
   position: relative;
-  height: 4rem;
+  height: 3.5rem;
   z-index: 150;
 }
 
@@ -38,4 +38,11 @@
 
 #basic-navbar-nav {
   gap: 0.5rem;
+}
+
+/*
+Fucking with the bootstrap css config
+*/
+.nav-item.show.dropdown > .dropdown-menu.show {
+  width: 100%;
 }

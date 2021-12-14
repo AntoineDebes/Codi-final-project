@@ -1,9 +1,10 @@
 import { jwtCreate } from "./../middleware/jwt";
-import { Request } from "express";
+import { Request, NextFunction } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
 import query from "./db";
 import bcrypt from "bcrypt";
+import { nodemailerEmailVerification } from "./Nodemailer";
 
 async function CreateUser(req: Request) {
   const {
@@ -40,13 +41,14 @@ async function CreateUser(req: Request) {
     `UPDATE users 
     SET token=? 
     WHERE ID=?`,
-    [token, ID]
+    [token, ID] 
   );
 
   let data: any = "Error in creating user";
 
   if (result.affectedRows && tokenInsert.affectedRows) {
-    data = { message: "success", token, userName };
+    await nodemailerEmailVerification({ email, token });
+    data = { message: "success" };
   }
 
   return { data };
@@ -57,30 +59,34 @@ async function LogUserIn(req: Request) {
 
   email.toLowerCase();
 
-  console.log(email, password);
-
-  const user = await query(
+  const users: any[] = await query(
     `
-  SELECT * FROM users WHERE email = ?`,
+  SELECT * FROM users WHERE email = ? `,
     [email]
   );
+<<<<<<< HEAD
+=======
+  const user = users[0];
+>>>>>>> Dev
 
-  let message: any = new Error();
+  if (user.verified !== 1) {
+    // return {
+    //   message: "Please check your email for verification",
+    // };
 
-  if (user) {
-    const verifyPassword = await bcrypt.compare(password, user[0].password);
+    throw new Error("Please check your email for verfication");
+  } else if (!!user) {
+    const verifyPassword = await bcrypt.compare(password, user.password);
     if (verifyPassword) {
-      const token = await jwtCreate(user[0].ID);
+      const token = await jwtCreate(user.ID);
       return {
         token,
-        userName: user[0].user_name,
+        userName: user.user_name,
         message: "success",
       };
     }
   }
-  console.log(user[0], "user[0]");
-
-  return { message };
+  throw new Error("Invalid username or password");
 }
 
 async function EmailVerification(req: GetUserAuthInfoRequest) {
@@ -114,50 +120,6 @@ async function deleteUser(req: GetUserAuthInfoRequest) {
   }
   return { message };
 }
-
-//   public async CreateUser(req: Request) {
-//       const {email, userName, Phone} = req.body;
-//     try {
-//       if (
-//         !!(await this.connection(this.user).findOne({ Email: req.body.Email }))
-//       )
-//         return { message: "Email already exists!!", status: 400 };
-//       if (
-//         !!(await this.connection(this.user).findOne({
-//           UserName: req.body.UserName,
-//         }))
-//       )
-//         return { message: "UserName already exists!!", status: 400 };
-//       if (
-//         !!(await this.connection(this.user).findOne({
-//           PhoneNumber: req.body.PhoneNumber,
-//         }))
-//       )
-//         return { message: "Phone Number already exists!!", status: 400 };
-//       const hash = await bcrypt.hash(
-//         req.body.Password,
-//         process.env.SALTROUND || 10
-//       );
-//       await this.connection(this.user).save({
-//         ...req.body,
-//         Password: hash,
-//       });
-
-//       let ID: any = await this.connection(this.user).query(
-//         "SELECT ID,Email FROM user WHERE Email=?",
-//         [req.body.Email]
-//       );
-//       let data: any[] = [];
-//       data = ID;
-//       const token = await jwt.sign({ ID: data[0].ID }, "theSecret", {
-//         expiresIn: "12h",
-//       });
-
-//     return { message: "User Created", status: 200 };
-//     } catch (error) {
-//       return { message: error.message, status: 400 };
-//     }
-//   }
 
 const UserCrud = {
   CreateUser,

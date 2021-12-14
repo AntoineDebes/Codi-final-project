@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AdminProductModel } from "../Models/FormModels/AdminProduct.model";
 import "./AddProductPage.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function AddProductPage() {
   const {
@@ -81,7 +81,6 @@ function AddProductPage() {
 
   return (
     <>
-      <ToastContainer />
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
         className="wrapper__add--product__form"

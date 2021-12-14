@@ -28,3 +28,16 @@
   text-decoration: none;
   color: black;
 }
+
+.loading__popup__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  box-shadow: inset 1px 1px 1px 1000px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}

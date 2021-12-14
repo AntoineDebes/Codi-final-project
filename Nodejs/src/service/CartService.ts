@@ -1,14 +1,13 @@
 import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { CartModel } from "../entity/CartModel";
-import { ProductModel } from "../entity/ProductModel";
-const db = require("./db");
+import query from "./db";
 
 async function CreateCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
   const { status }: CartModel = req.body;
 
-  const result = await db.query(
+  const result = await query(
     `INSERT INTO cart
       (use_ID, status) 
       VALUES 
@@ -28,7 +27,7 @@ async function CreateCart(req: GetUserAuthInfoRequest) {
 async function DeleteCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
 
-  const result = await db.query(`DELETE FROM cart WHERE ID=?`, [userID]);
+  const result = await query(`DELETE FROM cart WHERE ID=?`, [userID]);
   let message = "Error in deleting your cart";
 
   if (result.affectedRows) {
