@@ -5,5 +5,6 @@ export interface HomepageCardProps {
   name: string;
   content: string;
   price?: string;
-  id?: string | number;
+  ID?: any;
+  deleteProduct?: any;
 }

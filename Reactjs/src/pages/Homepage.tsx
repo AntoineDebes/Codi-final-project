@@ -23,9 +23,9 @@ function Homepage(): JSX.Element {
       <div className="wrapper__container__hero__container">
         <Carousel className="wrapper__container__hero">
           {cards?.hero.map(
-            ({ content, ImageFormat, Base64, id, name }: HomepageCardProps) => {
+            ({ content, ImageFormat, Base64, ID, name }: HomepageCardProps) => {
               return (
-                <Carousel.Item key={id}>
+                <Carousel.Item key={ID}>
                   <img
                     className="d-block w-100"
                     src={`${ImageFormat},${Base64}`}
@@ -53,7 +53,7 @@ function Homepage(): JSX.Element {
               imageAlt,
               price,
               name,
-              id,
+              ID,
             }: HomepageCardProps) => {
               return (
                 <HomepageCard
@@ -63,7 +63,7 @@ function Homepage(): JSX.Element {
                   imageAlt={imageAlt}
                   price={price}
                   name={name}
-                  key={id}
+                  key={ID}
                 />
               );
             }

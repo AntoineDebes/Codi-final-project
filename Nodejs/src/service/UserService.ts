@@ -64,7 +64,6 @@ async function LogUserIn(req: Request) {
   SELECT * FROM users WHERE email = ?`,
     [email]
   );
-  console.log("hey");
 
   let message: any = new Error();
 

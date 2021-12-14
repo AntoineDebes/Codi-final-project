@@ -6,6 +6,23 @@ import { HomepageCardProps } from "../Models/DataModels/HomepageCardProps";
 
 function ProductUpdateRemove() {
   const [products, setProducts] = useState<any>();
+
+  const deleteProduct = (id: string) => {
+    console.log({ id });
+
+    Api({
+      method: "delete",
+      fetchApiUrl: "products",
+      params: { productID: id },
+    })
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     Api({ method: "GET", fetchApiUrl: "products" }).then((res: any) =>
       setProducts(res.data)
@@ -25,7 +42,7 @@ function ProductUpdateRemove() {
             ImageFormat,
             Base64,
             imageAlt,
-            id,
+            ID,
           }: HomepageCardProps) => {
             return (
               <HomepageCard
@@ -35,7 +52,9 @@ function ProductUpdateRemove() {
                 imageAlt={imageAlt}
                 price={price}
                 name={name}
-                key={id}
+                ID={ID}
+                deleteProduct={deleteProduct}
+                key={ID}
               />
             );
           }
@@ -53,7 +72,7 @@ function ProductUpdateRemove() {
             ImageFormat,
             Base64,
             imageAlt,
-            id,
+            ID,
           }: HomepageCardProps) => {
             return (
               <HomepageCard
@@ -63,7 +82,9 @@ function ProductUpdateRemove() {
                 imageAlt={imageAlt}
                 price={price}
                 name={name}
-                key={id}
+                key={ID}
+                ID={ID}
+                deleteProduct={(e: string) => deleteProduct(e)}
               />
             );
           }
@@ -81,7 +102,7 @@ function ProductUpdateRemove() {
             ImageFormat,
             Base64,
             imageAlt,
-            id,
+            ID,
           }: HomepageCardProps) => {
             return (
               <HomepageCard
@@ -90,8 +111,10 @@ function ProductUpdateRemove() {
                 Base64={Base64}
                 imageAlt={imageAlt}
                 price={price}
+                ID={ID}
                 name={name}
-                key={id}
+                key={ID}
+                deleteProduct={(e: string) => deleteProduct(e)}
               />
             );
           }

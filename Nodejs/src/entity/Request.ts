@@ -4,5 +4,6 @@ export interface GetUserAuthInfoRequest extends Request {
 }
 
 export interface GetProductInfoRequest extends Request {
+  userID?: string;
   productID?: string;
 }

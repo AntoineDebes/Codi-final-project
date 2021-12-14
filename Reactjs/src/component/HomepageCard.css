@@ -32,6 +32,15 @@
   color: white;
 }
 
+.homepage__container__cards__img__container__delete {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  color: white;
+  padding: 0.4rem;
+}
+
 .homepage__container__homepage__content {
   height: 40px;
 }

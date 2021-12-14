@@ -10,12 +10,16 @@ export const jwtVerify = async (
   response: Response,
   next: Function
 ) => {
+  console.log("jwt passed");
+
   await jwt
     .verify(
       request.headers["auth-token"],
       process.env.ACCESS_TOKEN_SECRET,
       async function (err: any, decoded: any) {
         if (err) {
+          console.log("err");
+
           return { message: "invalid token", status: 401 };
         } else {
           request.userID = decoded.ID;

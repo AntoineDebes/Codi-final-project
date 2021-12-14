@@ -4,9 +4,10 @@ interface ApiProps {
   method: Method;
   fetchApiUrl: string;
   data?: any;
+  params?: any;
 }
 
-function Api({ method, fetchApiUrl, data }: ApiProps) {
+function Api({ method, fetchApiUrl, data, params }: ApiProps) {
   const token = localStorage.getItem("login") ?? "";
 
   return new Promise((res, rej) => {
@@ -17,6 +18,7 @@ function Api({ method, fetchApiUrl, data }: ApiProps) {
         Authorization: token, // sending the token for the verification
       },
       data, // data passed
+      params,
     })
       .then((response) => {
         console.log(response);

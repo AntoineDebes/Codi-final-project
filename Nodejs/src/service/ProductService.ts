@@ -73,16 +73,21 @@ async function CreateProduct(req: Request) {
 }
 
 async function DeleteProduct(req: GetProductInfoRequest) {
-  const { productID } = req;
+  const {
+    params: { productID },
+    userID,
+  } = req;
+  console.log("userID", userID);
+  console.log("productID", productID);
 
-  const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
+  // const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
   let message = "Error in deleting your product";
 
-  if (result.affectedRows) {
-    return {
-      message: "success",
-    };
-  }
+  // if (result.affectedRows) {
+  //   return {
+  //     message: "success",
+  //   };
+  // }
   return { message };
 }
 

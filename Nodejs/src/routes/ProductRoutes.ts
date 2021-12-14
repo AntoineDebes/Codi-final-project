@@ -17,6 +17,7 @@ export const ProductRoutes = [
   {
     method: "delete",
     route: "/products",
+    middleware: [jwtVerify],
     controller: ProductController,
     action: "delete",
   },
