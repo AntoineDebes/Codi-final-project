@@ -10,7 +10,7 @@ export const jwtVerify = async (
   response: Response,
   next: Function
 ) => {
-  console.log("jwt passed");
+  console.log(request.headers["auth-token"]);
 
   await jwt
     .verify(

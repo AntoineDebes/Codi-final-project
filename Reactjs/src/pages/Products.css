@@ -9,4 +9,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
   grid-template-rows: auto;
+  place-content: center;
+  gap: 1em;
 }

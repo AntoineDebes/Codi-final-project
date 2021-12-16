@@ -30,7 +30,9 @@
   align-items: center;
   gap: 0.7rem;
   color: unset;
+  padding: 0;
 }
+
 .profile--icon {
   align-self: center;
   font-size: 1.5rem;
@@ -44,5 +46,28 @@
 Fucking with the bootstrap css config
 */
 .nav-item.show.dropdown > .dropdown-menu.show {
+  min-width: max-content;
+  padding: 0 0.3rem;
   width: 100%;
+}
+
+.nav-item.show.dropdown > .dropdown-menu.show > * {
+  display: block;
+}
+
+.basic-navbar-nav__dropdown {
+  margin-top: 0.2rem;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+}
+.basic-navbar-nav__dropdown.navbar-collapse.collapse.show:nth-last-child() {
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 575px) {
+  .basic-navbar-nav__dropdown {
+    position: static;
+  }
 }

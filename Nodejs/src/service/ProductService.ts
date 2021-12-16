@@ -2,10 +2,12 @@ import { Request } from "express";
 import { GetProductInfoRequest } from "../entity/Request";
 import { ProductModel } from "../entity/ProductModel";
 import query from "./db";
+import { isAdminCheck } from "./IsAdminCheck";
 
-async function GetAllProduct(req: Request) {
+const unkownError = "Something went wrong, Please try again later";
+
+async function GetAllProduct() {
   const result = await query(`SELECT * FROM product`);
-  let message = "Error in getting the products";
 
   let nestedObject: any = {
     hero: [],
@@ -26,23 +28,28 @@ async function GetAllProduct(req: Request) {
 
     return nestedObject;
   }
-  return { message };
+  throw new Error(unkownError);
 }
 
-async function CreateProduct(req: Request) {
+async function CreateProduct(req: ProductModel) {
   const {
-    name,
-    serialNumber,
-    price,
-    quantity,
-    packaging,
-    transport,
-    base64,
-    imageFormat,
-    productPlacement,
-    content,
-  }: ProductModel = req.body;
+    userID,
+    body: {
+      name,
+      serialNumber,
+      price,
+      quantity,
+      packaging,
+      transport,
+      base64,
+      imageFormat,
+      productPlacement,
+      content,
+    },
+  }: ProductModel = req;
   // console.log(name, serialNumber, price, quantity, packaging, transport);
+
+  await isAdminCheck(userID);
 
   const result = await query(
     `INSERT INTO product
@@ -63,32 +70,31 @@ async function CreateProduct(req: Request) {
     ]
   );
 
-  let message = "Error in creating product";
-
   if (result.affectedRows) {
-    message = "success";
+    return {
+      message: "Product has been added",
+    };
   }
 
-  return { message };
+  throw new Error(unkownError);
 }
 
 async function DeleteProduct(req: GetProductInfoRequest) {
   const {
-    params: { productID },
+    body: { productID },
     userID,
   } = req;
-  console.log("userID", userID);
-  console.log("productID", productID);
 
-  // const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
-  let message = "Error in deleting your product";
+  await isAdminCheck(userID);
 
-  // if (result.affectedRows) {
-  //   return {
-  //     message: "success",
-  //   };
-  // }
-  return { message };
+  const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
+
+  if (result.affectedRows) {
+    return {
+      message: "Product has been deleted",
+    };
+  }
+  throw new Error(unkownError);
 }
 
 const UserCrud = {

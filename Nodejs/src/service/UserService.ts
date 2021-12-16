@@ -1,5 +1,5 @@
 import { jwtCreate } from "./../middleware/jwt";
-import { Request, NextFunction } from "express";
+import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { UserModelCreate, UserModelLogin } from "../entity/User";
 import query from "./db";
@@ -41,7 +41,7 @@ async function CreateUser(req: Request) {
     `UPDATE users 
     SET token=? 
     WHERE ID=?`,
-    [token, ID] 
+    [token, ID]
   );
 
   let data: any = "Error in creating user";
@@ -64,16 +64,9 @@ async function LogUserIn(req: Request) {
   SELECT * FROM users WHERE email = ? `,
     [email]
   );
-<<<<<<< HEAD
-=======
   const user = users[0];
->>>>>>> Dev
 
   if (user.verified !== 1) {
-    // return {
-    //   message: "Please check your email for verification",
-    // };
-
     throw new Error("Please check your email for verfication");
   } else if (!!user) {
     const verifyPassword = await bcrypt.compare(password, user.password);
@@ -81,6 +74,7 @@ async function LogUserIn(req: Request) {
       const token = await jwtCreate(user.ID);
       return {
         token,
+        isAdmin: user.isAdmin === 1 ? true : false,
         userName: user.user_name,
         message: "success",
       };

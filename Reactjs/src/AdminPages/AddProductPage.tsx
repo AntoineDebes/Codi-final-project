@@ -19,7 +19,6 @@ function AddProductPage() {
   const handleSelectedChange = (event: any) => {
     setProductPlacement(event.target.value);
   };
-  const notify = (msg: string) => toast(msg);
   const onSubmitHandler: SubmitHandler<AdminProductModel> = (data) => {
     if (image) {
       console.log("passing");
@@ -38,15 +37,15 @@ function AddProductPage() {
       };
       console.log({ params });
 
-      Api({ method: "POST", fetchApiUrl: "products", data: params }).then(
-        (res: any) => {
-          console.log("test");
-
+      Api({ method: "POST", fetchApiUrl: "products", data: params })
+        .then((res: any) => {
           reset();
           setFileName("");
-          notify("success");
-        }
-      );
+          toast(res.data.message);
+        })
+        .catch((err: any) => {
+          toast(err.response.data.message);
+        });
     }
   };
 
@@ -240,7 +239,7 @@ function AddProductPage() {
           </div>
         </div>
         <div>
-          <button onClick={() => handleUploadClick()}>Upload an Image</button>
+          <div onClick={() => handleUploadClick()}>Upload an Image</div>
           <span>{fileName}</span>
         </div>
         <div>

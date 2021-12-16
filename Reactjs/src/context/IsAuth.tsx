@@ -11,9 +11,15 @@ export function useIsAuthContext() {
 }
 
 export function IsAuthContextProvider({ children }: any) {
-  let isUserAuth = !!localStorage.getItem("isUserAuth") ?? false;
+  let localstorageVariable = localStorage.getItem("isUserAuth");
+  let userCredentials: any = localstorageVariable
+    ? JSON.parse(localstorageVariable)
+    : {
+        isUserAuth: false,
+        isAdmin: false,
+      };
 
-  const [isUserLogedIn, setIsUserLogedIn] = useState(isUserAuth);
+  const [isUserLogedIn, setIsUserLogedIn] = useState(userCredentials);
 
   return (
     <>

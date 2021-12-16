@@ -3,9 +3,17 @@ import Api from "../API";
 import HomepageCard from "../component/HomepageCard";
 import "./ProductUpdateRemove.css";
 import { HomepageCardProps } from "../Models/DataModels/HomepageCardProps";
+import { toast } from "react-toastify";
+import { TIMEOUT } from "dns";
 
 function ProductUpdateRemove() {
   const [products, setProducts] = useState<any>();
+
+  const fetchData = () => {
+    Api({ method: "GET", fetchApiUrl: "products" }).then((res: any) =>
+      setProducts(res.data)
+    );
+  };
 
   const deleteProduct = (id: string) => {
     console.log({ id });
@@ -13,20 +21,21 @@ function ProductUpdateRemove() {
     Api({
       method: "delete",
       fetchApiUrl: "products",
-      params: { productID: id },
+      data: { productID: id },
     })
       .then((res: any) => {
-        console.log(res);
+        toast(res.data.message);
       })
       .catch((err) => {
-        console.log(err);
+        toast(err.response.data.message);
       });
+    setTimeout(() => {
+      fetchData();
+    }, 500);
   };
 
   useEffect(() => {
-    Api({ method: "GET", fetchApiUrl: "products" }).then((res: any) =>
-      setProducts(res.data)
-    );
+    fetchData();
   }, []);
   return (
     <>

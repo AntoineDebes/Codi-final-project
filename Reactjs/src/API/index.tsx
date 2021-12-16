@@ -9,7 +9,8 @@ interface ApiProps {
 }
 
 function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
-  const token = tokenProp || localStorage.getItem("login") || "";
+  const token = tokenProp || localStorage.getItem("Token") || "";
+  console.log("token", token);
 
   return new Promise((res, rej) => {
     Axios({

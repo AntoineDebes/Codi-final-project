@@ -29,17 +29,22 @@ function Signin({ setIsLoginOpen }: SigninProps) {
   });
 
   const onSubmit: SubmitHandler<UserLoginModel> = (data) => {
+    console.log("submitting");
+
     let params: UserLoginModel = {
       email: data.email,
       password: data.password,
     };
     API({ method: "post", fetchApiUrl: "userLogin", data: params })
       .then((res: any) => {
+        console.log("response");
+
         if (res.status === 200) {
+          let useCredentials = { isUserAuth: true, isAdmin: res.data.isAdmin };
           localStorage.setItem("Token", res.data.token);
           localStorage.setItem("Username", res.data.userName);
-          localStorage.setItem("isUserAuth", "true");
-          setIsUserLogedIn(true);
+          localStorage.setItem("isUserAuth", JSON.stringify(useCredentials));
+          setIsUserLogedIn(useCredentials);
           setIsLoginOpen(false);
         }
       })

@@ -6,8 +6,12 @@ import Signin from "./Signin";
 import { useIsAuthContext } from "../context/IsAuth";
 
 function NavbarComponent() {
-  const { isUserLogedIn, setIsUserLogedIn } = useIsAuthContext();
+  const {
+    isUserLogedIn: { isAdmin, isUserAuth },
+    setIsUserLogedIn,
+  } = useIsAuthContext();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const userName = localStorage.getItem("Username") ?? "";
 
   const navDropdownTitle = (
@@ -20,6 +24,7 @@ function NavbarComponent() {
     setIsUserLogedIn(false);
     localStorage.clear();
   };
+  console.log(isAdmin, isUserAuth);
 
   return (
     <>
@@ -29,12 +34,23 @@ function NavbarComponent() {
           <Container>
             <Navbar.Brand href="/">LOGO</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse
+              id="basic-navbar-nav"
+              className="basic-navbar-nav__dropdown"
+            >
               <Nav className="me-auto navbar__container__links">
                 <Link to="/">Home</Link>
                 <Link to="/products">Products</Link>
+                {isAdmin ? (
+                  <NavDropdown title={"Dashboard"} id="basic-nav-dropdown">
+                    <Link to="/addadminproducts">Add Products</Link>
+                    <Link to="/productupdateremove">
+                      Delete/update Products
+                    </Link>
+                  </NavDropdown>
+                ) : null}
               </Nav>
-              {isUserLogedIn ? (
+              {isUserAuth ? (
                 <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
                   <Link to="/">Cart</Link>
                   <div onClick={handleSignOut}>Logout</div>
