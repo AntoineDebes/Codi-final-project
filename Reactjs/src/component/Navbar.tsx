@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import Signin from "./Signin";
 import { useIsAuthContext } from "../context/IsAuth";
+import { useAppContext } from "../context/AppContext";
 
 function NavbarComponent() {
   const {
@@ -11,7 +12,7 @@ function NavbarComponent() {
     setIsUserLogedIn,
   } = useIsAuthContext();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
+  const { appContext } = useAppContext();
   const userName = localStorage.getItem("Username") ?? "";
 
   const navDropdownTitle = (
@@ -52,12 +53,24 @@ function NavbarComponent() {
               </Nav>
               {isUserAuth ? (
                 <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
-                  <Link to="/">Cart</Link>
-                  <div onClick={handleSignOut}>Logout</div>
+                  <Link to="/" className="navbar__cart-length__container">
+                    Cart
+                    {!!appContext?.length ? (
+                      <div className="navbar__cart-length__circle">
+                        {appContext?.length}
+                      </div>
+                    ) : null}
+                  </Link>
+                  <div onClick={handleSignOut} className="navbar__logout__btn">
+                    Logout
+                  </div>
                 </NavDropdown>
               ) : (
                 <Nav className="navbar__container__links">
-                  <button onClick={() => setIsLoginOpen(!isLoginOpen)}>
+                  <button
+                    className="navbar__container__links__login-register--btn"
+                    onClick={() => setIsLoginOpen(!isLoginOpen)}
+                  >
                     Register/Login
                   </button>
                 </Nav>

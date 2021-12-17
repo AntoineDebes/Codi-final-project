@@ -13,6 +13,7 @@ interface ProductCardProps {
   transport: string;
   ImageFormat: string;
   Base64: string;
+  ID: string;
 }
 
 function ProductCard({
@@ -26,6 +27,7 @@ function ProductCard({
   serial_number,
   quantity,
   transport,
+  ID,
 }: ProductCardProps) {
   const [isProductPopupOn, setIsProductPopupOn] = useState<boolean>(false);
 
@@ -43,6 +45,7 @@ function ProductCard({
           transport={transport}
           ImageFormat={ImageFormat}
           Base64={Base64}
+          ID={ID}
           setIsProductPopupOn={setIsProductPopupOn}
         />
       ) : null}

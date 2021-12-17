@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductInfo.css";
+
+import { useClickOutside } from "../context/ClickOutside";
+import Api from "../API";
 
 interface ProductInfoProps {
   imageAlt: string;
@@ -13,6 +16,7 @@ interface ProductInfoProps {
   ImageFormat: string;
   transport: string;
   setIsProductPopupOn: Function;
+  ID: string;
 }
 
 function ProductInfo({
@@ -27,11 +31,34 @@ function ProductInfo({
   ImageFormat,
   transport,
   setIsProductPopupOn,
+  ID,
 }: ProductInfoProps) {
+  const [quantityOfProduct, setQuantityOfProduct] = useState<number>(0);
+
+  const incrementQuantity = () => {
+    return setQuantityOfProduct(quantityOfProduct + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantityOfProduct) return;
+    return setQuantityOfProduct(quantityOfProduct - 1);
+  };
+
+  const addProductToCart = () => {
+    let params = {
+      quantity: quantityOfProduct,
+      product_ID: ID,
+    };
+    Api({ method: "post", fetchApiUrl: "carts", data: "" });
+  };
+
+  const domNode = useClickOutside(() => {
+    setIsProductPopupOn(false);
+  });
   return (
     <>
       <div className="product-info__container">
-        <div className="product-info__container__product">
+        <div className="product-info__container__product" ref={domNode}>
           <div
             className="wrapper__form__go-exit__btn"
             onClick={() => setIsProductPopupOn(false)}
@@ -52,9 +79,16 @@ function ProductInfo({
               <p>{transport}</p>
               <p>{packaging}</p>
             </div>
-            <div>{quantity}</div>
             <div>
-              <button type="button"> Add to cart</button>
+              <p>{quantity}</p>
+              <span onClick={() => incrementQuantity}>increment</span>
+              <span onClick={() => decrementQuantity}>increment</span>
+            </div>
+            <div>
+              <button type="button" onClick={addProductToCart}>
+                {" "}
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

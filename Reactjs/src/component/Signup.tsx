@@ -56,7 +56,6 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
     })
       .then((res: any) => {
         if (res.status === 200) {
-          // setIsLoginOpen(false);
           setIsEmailVerificationOpen(true);
         }
         setTimeout(() => {
@@ -256,7 +255,7 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
       <div className="wrapper__signup__terms">
         <input type="checkbox" onClick={handleTermsAndConditions} />
         <p>
-          I have read and agree to the
+          I have read and agree to the{" "}
           <span style={{ color: "var(--primary-color)", fontWeight: 600 }}>
             Terms and Conditions
           </span>

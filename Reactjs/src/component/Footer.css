@@ -1,7 +1,7 @@
 .wrapper__footer {
   width: 100%;
   background-color: black;
-  padding-top: 2rem;
+  padding-top: 2em;
 }
 
 .wrapper__footer i {
@@ -14,7 +14,7 @@
   background-color: inherit;
   color: var(--primary-color);
   margin: 0 auto;
-  height: 8rem;
+  height: 8em;
   display: flex;
   justify-content: space-around;
   color: white;

@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./normalize.css";
+import { AppContextCreateProvider } from "./context/AppContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContextCreateProvider>
+      <App />
+    </AppContextCreateProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

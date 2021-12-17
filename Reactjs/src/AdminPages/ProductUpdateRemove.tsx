@@ -4,7 +4,6 @@ import HomepageCard from "../component/HomepageCard";
 import "./ProductUpdateRemove.css";
 import { HomepageCardProps } from "../Models/DataModels/HomepageCardProps";
 import { toast } from "react-toastify";
-import { TIMEOUT } from "dns";
 
 function ProductUpdateRemove() {
   const [products, setProducts] = useState<any>();

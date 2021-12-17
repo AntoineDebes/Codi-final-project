@@ -3,6 +3,13 @@ import { CartController } from "../controller/CartController";
 
 export const CartRoutes = [
   {
+    method: "get",
+    route: "/carts",
+    middleware: [jwtVerify],
+    controller: CartController,
+    action: "all",
+  },
+  {
     method: "post",
     route: "/carts",
     middleware: [jwtVerify],

@@ -1,0 +1,28 @@
+.wrapper__content__verification-email__container--before {
+  min-height: 50vh;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper__content__verification-email {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+}
+
+.wrapper__content__verification-email > h3 {
+  text-align: center;
+}
+
+.wrapper__content__verification-email__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.wrapper__content__verification-email__container > p {
+  text-align: center;
+}

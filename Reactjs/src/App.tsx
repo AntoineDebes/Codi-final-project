@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IsAuthContextProvider } from "./context/IsAuth";
@@ -7,9 +7,22 @@ import Axios from "axios";
 import { BounceLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAppContext } from "./context/AppContext";
+import Api from "./API";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setAppContext } = useAppContext();
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const fetchCart = () => {
+    Api({ method: "get", fetchApiUrl: "carts" }).then((res: any) => {
+      setAppContext(res.data.result);
+    });
+  };
 
   Axios.interceptors.request.use((res: any) => {
     if (res.url.match(/userLogin$/)) return res;

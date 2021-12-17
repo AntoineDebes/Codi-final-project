@@ -2,6 +2,15 @@ import { NextFunction, Request, Response } from "express";
 import CartCrud from "../service/CartService";
 
 export class CartController {
+  async all(request: Request, response: Response, next: NextFunction) {
+    try {
+      return response.status(200).json(await CartCrud.AllCart(request));
+    } catch (error) {
+      return response.status(403).json({
+        message: error.message,
+      });
+    }
+  }
   async add(request: Request, response: Response, next: NextFunction) {
     try {
       return response.status(200).json(await CartCrud.CreateCart(request));

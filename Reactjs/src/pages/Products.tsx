@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Products.css";
 import ProductCard from "../component/ProductCard";
-import { Toshiba } from "../images";
+
 import Api from "../API";
 import { toast } from "react-toastify";
 
@@ -59,6 +59,7 @@ function Products() {
                 title={name}
                 price={price}
                 key={ID}
+                ID={ID}
                 packaging={packaging}
                 serial_number={serial_number}
                 quantity={quantity}
@@ -87,6 +88,7 @@ function Products() {
                 Base64={Base64}
                 imageAlt="Image"
                 title={name}
+                ID={ID}
                 price={price}
                 key={ID}
                 packaging={packaging}

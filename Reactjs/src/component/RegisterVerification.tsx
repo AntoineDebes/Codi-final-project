@@ -11,12 +11,13 @@ function RegisterVerification({ setIsLoginOpen }: RegisterVerificationProps) {
         className="wrapper__form__go-exit__btn"
         onClick={() => setIsLoginOpen(false)}
       >
-        <i className="fas fa-times" />
+        <i className="fas fa-times text-white" />
       </div>
-      <h1>Please verify your email address</h1>
+      <h1>
+        Please verify your <span className="text-white"> email address</span>
+      </h1>
     </div>
   );
 }
 
 export default RegisterVerification;
-    

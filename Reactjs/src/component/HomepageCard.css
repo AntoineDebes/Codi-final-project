@@ -1,7 +1,7 @@
 .wrapper__container__homepage__cards {
   border: 2px solid red;
   display: flex;
-  padding: 0.3rem;
+  padding: 0.3em;
   background-color: brown;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,7 @@
   bottom: 0;
   right: 0;
   background-color: blue;
-  padding: 0.4rem;
+  padding: 0.4em;
   color: white;
 }
 
@@ -38,7 +38,7 @@
   left: 0;
   background-color: red;
   color: white;
-  padding: 0.4rem;
+  padding: 0.4em;
 }
 
 .homepage__container__homepage__content {

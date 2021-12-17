@@ -1,7 +1,20 @@
-import { Request } from "express";
 import { GetUserAuthInfoRequest } from "../entity/Request";
 import { CartModel } from "../entity/CartModel";
 import query from "./db";
+
+async function AllCart(req: GetUserAuthInfoRequest) {
+  const { userID } = req;
+
+  const result = await query(`SELECT * FROM cart_product WHERE user_id=?`, [
+    userID,
+  ]);
+
+  if (!!result.length) {
+    return { message: "success", result };
+  }
+
+  throw new Error("Error");
+}
 
 async function CreateCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
@@ -65,6 +78,7 @@ async function DeleteCart(req: GetUserAuthInfoRequest) {
 }
 
 const UserCrud = {
+  AllCart,
   CreateCart,
   UpdateCart,
   DeleteCart,

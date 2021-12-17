@@ -43,7 +43,11 @@ function Homepage(): JSX.Element {
         </Carousel>
       </div>
       <div className="wrapper__container">
-        <div className="wrapper__container__hompage__hot-sales">Hot Sales</div>
+        <div className="wrapper__container__hompage__hot-sales">
+          <h2 className="wrapper__container__hompage__hot-sales__title">
+            Hot Sales
+          </h2>
+        </div>
         <div className="wrapper__container__homepage__hot-sales__container">
           {cards?.sales?.map(
             ({

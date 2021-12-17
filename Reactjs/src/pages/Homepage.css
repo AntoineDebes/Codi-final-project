@@ -33,11 +33,15 @@
   text-align: center;
 }
 
+.wrapper__container__hompage__hot-sales__title {
+  padding: 0.8em 0;
+}
+
 .wrapper__container__homepage__hot-sales__container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 314px));
   place-content: center;
   grid-template-rows: auto;
-  gap: 1.5rem;
+  gap: 1.5em;
   grid-column: 1 /-1;
 }

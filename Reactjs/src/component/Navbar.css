@@ -1,6 +1,6 @@
 .navbar__container--before {
   position: relative;
-  height: 3.5rem;
+  height: 3.5em;
   z-index: 150;
 }
 
@@ -10,16 +10,38 @@
   background-color: white;
   top: 0;
   left: 0;
-  height: 3.5rem;
+  height: 3.5em;
 }
 
 .navbar__container__links {
-  gap: 1rem;
+  gap: 1em;
 }
 
-.navbar__container__links > * {
+.navbar__container__links
+  > *:not(.navbar__container__links__login-register--btn) {
   text-decoration: none;
   color: black;
+}
+
+.navbar__container__links__login-register--btn {
+  background-image: linear-gradient(
+    to right bottom,
+    #f96c00,
+    #e48600,
+    #cc9b00,
+    #afad00,
+    #8fbc00,
+    #80c31e,
+    #6eca32,
+    #57d145,
+    #5cd44a,
+    #60d74f,
+    #65d953,
+    #69dc58
+  );
+  border-radius: 9999px;
+  border: none;
+  padding: 0.3em 0.6em;
 }
 
 /** Bootstrap over-riding */
@@ -28,7 +50,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.7em;
   color: unset;
   padding: 0;
 }
@@ -39,7 +61,7 @@
 }
 
 #basic-navbar-nav {
-  gap: 0.5rem;
+  gap: 0.5em;
 }
 
 /*
@@ -47,7 +69,7 @@ Fucking with the bootstrap css config
 */
 .nav-item.show.dropdown > .dropdown-menu.show {
   min-width: max-content;
-  padding: 0 0.3rem;
+  padding: 0 0.3em;
   width: 100%;
 }
 
@@ -56,14 +78,44 @@ Fucking with the bootstrap css config
 }
 
 .basic-navbar-nav__dropdown {
-  margin-top: 0.2rem;
+  margin-top: 0.2em;
   position: absolute;
   width: 100%;
   top: 100%;
   left: 0;
 }
 .basic-navbar-nav__dropdown.navbar-collapse.collapse.show:nth-last-child() {
-  padding-top: 0.5rem;
+  padding-top: 0.5em;
+}
+
+.navbar__cart-length__container {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar__cart-length__circle {
+  padding: 0 0.5em;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+
+.dropdown-menu.show {
+  padding: 0.5em 0.2em 0.3em 0.2em !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.navbar__logout__btn {
+  width: 100%;
+  padding: 0.3em 0;
 }
 
 @media (min-width: 575px) {

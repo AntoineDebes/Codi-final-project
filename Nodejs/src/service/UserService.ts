@@ -26,10 +26,10 @@ async function CreateUser(req: Request) {
 
   const result = await query(
     `INSERT INTO users
-      (first_name, last_name, user_name, phone, email, password, address, verified) 
+      (first_name, last_name, user_name, phone, email, password, address, verified, isAdmin) 
       VALUES 
       (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [firstName, lastName, userName, phone, email, hashedPassword, address, 0]
+    [firstName, lastName, userName, phone, email, hashedPassword, address, 0, 0]
   );
   const targetedUser: any = await query("SELECT ID FROM users WHERE email=?", [
     email,
@@ -47,7 +47,7 @@ async function CreateUser(req: Request) {
   let data: any = "Error in creating user";
 
   if (result.affectedRows && tokenInsert.affectedRows) {
-    await nodemailerEmailVerification({ email, token });
+    await nodemailerEmailVerification({ email, token, userName });
     data = { message: "success" };
   }
 
