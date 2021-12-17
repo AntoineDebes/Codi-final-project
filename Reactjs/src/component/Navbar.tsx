@@ -31,7 +31,7 @@ function NavbarComponent() {
     <>
       {isLoginOpen ? <Signin setIsLoginOpen={setIsLoginOpen} /> : null}
       <div className="navbar__container--before">
-        <Navbar bg="light" expand="sm" className="navbar__container">
+        <Navbar expand="sm" className="navbar__container">
           <Container>
             <Navbar.Brand href="/">LOGO</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

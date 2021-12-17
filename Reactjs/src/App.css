@@ -1,8 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,500&display=swap');
 
 :root {
-  --primary-color: purple;
-  --max-width: 1360px;
+  --primary-color: hsl(103deg 91% 39%);
+  --secondary-color: hsl(120, 100%, 12%);
+  --tertiary-color: hsl(283, 100%, 42%);
+  --off-white: hsl(0, 0%, 97%);
+  --white-100: hsl(0, 0%, 100%);
+  --white-200: hsl(107, 31%, 94%);
+  --white-300: hsl(108, 27%, 89%);
+  --white-400: hsl(107, 29%, 84%);
+  --grey-100: hsl(102, 10%, 66%);
+  --black-100: hsl(103, 55%, 25%);
+  --black-200: hsl(105, 75%, 11%);
+  --black-300: hsl(96, 95%, 7%);
+  --black-400: hsl(96, 100%, 1%);
+  --max-width: 1770px;
   --hero-width: 1920px;
 }
 
@@ -10,8 +22,8 @@
   min-height: 100vh;
   height: 100%;
   position: relative;
-  background-color: #f6f6f6;
-  font-family: "Roboto", sans-serif;
+  background-color: var(--off-white);
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .wrapper__container {
@@ -19,7 +31,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  padding: 0.5em 1em;
+  padding: 4em 1em;
   margin: 0 auto;
   max-width: var(--max-width);
 }
@@ -28,9 +40,18 @@
   grid-column: 1 / -1;
 }
 
+.navbar>.container {
+  max-width: 1770px;
+  padding-left: 0;
+}
+
+.wrapper__footer__container > div {
+  margin-right: 6vw;
+}
+
 .links--dom {
   text-decoration: none;
-  color: black;
+  color: var(--black-400);
 }
 
 .loading__popup__container {
