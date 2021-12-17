@@ -40,7 +40,7 @@ function ProductInfo({
   };
 
   const decrementQuantity = () => {
-    if (quantityOfProduct) return;
+    if (!!!quantityOfProduct) return;
     return setQuantityOfProduct(quantityOfProduct - 1);
   };
 
@@ -76,13 +76,14 @@ function ProductInfo({
             <div className="product-info__container__product__container__content">
               <p>{serial_number}</p>
               <p>{price}</p>
+              <p>{quantity}</p>
               <p>{transport}</p>
               <p>{packaging}</p>
             </div>
             <div>
-              <p>{quantity}</p>
-              <span onClick={() => incrementQuantity}>increment</span>
-              <span onClick={() => decrementQuantity}>increment</span>
+              <p>{quantityOfProduct}</p>
+              <span onClick={() => incrementQuantity()}>Increment</span>
+              <span onClick={() => decrementQuantity()}>Decrement</span>
             </div>
             <div>
               <button type="button" onClick={addProductToCart}>
