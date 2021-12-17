@@ -10,28 +10,33 @@ export const jwtVerify = async (
   response: Response,
   next: Function
 ) => {
-  console.log(request.headers["auth-token"]);
+  console.log(request.headers["authorization"]);
+  const userJwt = request.headers["authorization"];
 
-  await jwt
-    .verify(
-      request.headers["auth-token"],
-      process.env.ACCESS_TOKEN_SECRET,
-      async function (err: any, decoded: any) {
-        if (err) {
-          console.log("err");
+  if (!!userJwt.length) {
+    await jwt
+      .verify(
+        request.headers["authorization"],
+        process.env.ACCESS_TOKEN_SECRET,
+        async function (err: any, decoded: any) {
+          if (err) {
+            console.log("err");
 
-          return { message: "invalid token", status: 401 };
-        } else {
-          request.userID = decoded.ID;
-          next();
+            throw new Error("invalid token");
+          } else {
+            request.userID = decoded.ID;
+            next();
+          }
         }
-      }
-    )
-    .catch((err: Error) => {
-      return {
-        message: `JWT function error \n ${err}`,
-      };
-    });
+      )
+      .catch((err: Error) => {
+        console.log("errored");
+
+        return response.status(401).json({ message: "User not Authorized" });
+      });
+  } else {
+    return response.status(401).json({ message: "User not Authorized" });
+  }
 };
 
 export const jwtCreate = (ID: any) => {

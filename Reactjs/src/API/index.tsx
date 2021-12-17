@@ -17,7 +17,7 @@ function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
       method, // Method like GET, POST, DELETE, PUT ...
       url: `${process.env.REACT_APP_API_URL}${fetchApiUrl}`,
       headers: {
-        "auth-token": token, // sending the token for the verification
+        authorization: token, // sending the token for the verification
       },
       data, // data passed
       params,

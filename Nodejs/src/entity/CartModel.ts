@@ -1,3 +1,4 @@
 export interface CartModel {
-  status: string | number;
+  product_ID: string;
+  quantity: string | number;
 }

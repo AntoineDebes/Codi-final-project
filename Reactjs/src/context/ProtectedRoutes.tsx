@@ -2,10 +2,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useIsAuthContext } from "../context/IsAuth";
 
 function ProtectedRoute() {
-  const { isUserLogedIn } = useIsAuthContext();
-  console.log(isUserLogedIn);
+  const {
+    isUserLogedIn: { isAdmin },
+  } = useIsAuthContext();
+  console.log(isAdmin);
 
-  return isUserLogedIn ? <Outlet /> : <Navigate to="/" />;
+  return isAdmin ? <Outlet /> : <Navigate to="/" />;
 }
 
 export default ProtectedRoute;

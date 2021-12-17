@@ -5,41 +5,68 @@ import query from "./db";
 
 async function CreateCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
-  const { status }: CartModel = req.body;
+  const { quantity, product_ID }: CartModel = req.body;
 
-  const result = await query(
-    `INSERT INTO cart
-      (use_ID, status) 
-      VALUES 
-      (?, ?, ?, ?, ?, ?)`,
-    [userID, status]
+  const fetchUserCarts = await query(
+    `
+  SELECT * from cart_product WHERE user_id=? AND product_ID=?`,
+    [userID, product_ID]
   );
 
-  let message = "Error in creating cart";
-
-  if (result.affectedRows) {
-    message = "success";
+  if (!!fetchUserCarts.length) {
+    console.log("fetchUserCarts", fetchUserCarts);
+    return await UpdateCart(req);
   }
 
-  return { message };
+  const result = await query(
+    `INSERT INTO cart_product
+      (user_id, product_ID, Quantity) 
+      VALUES 
+      (?, ?, ?)`,
+    [userID, product_ID, quantity]
+  );
+
+  if (result.affectedRows) {
+    return { message: "Product has been added" };
+  }
+
+  throw new Error("Something went wrong");
+}
+
+async function UpdateCart(req: GetUserAuthInfoRequest) {
+  const { userID } = req;
+  const { quantity, product_ID }: CartModel = req.body;
+
+  const result = await query(
+    `UPDATE cart_product 
+      SET Quantity=? 
+      WHERE user_id=? AND product_ID=?`,
+    [quantity, userID, product_ID]
+  );
+
+  if (result.affectedRows) {
+    return { message: "success" };
+  }
+
+  throw new Error("Something went wrong");
 }
 
 async function DeleteCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
 
   const result = await query(`DELETE FROM cart WHERE ID=?`, [userID]);
-  let message = "Error in deleting your cart";
 
   if (result.affectedRows) {
     return {
       message: "success",
     };
   }
-  return { message };
+  throw new Error("Something went wrong");
 }
 
 const UserCrud = {
   CreateCart,
+  UpdateCart,
   DeleteCart,
 };
 export default UserCrud;

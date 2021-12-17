@@ -3,6 +3,7 @@ import { ProductRoutes } from "./routes/ProductRoutes";
 import swaggerUI from "swagger-ui-express";
 import "dotenv/config";
 import { UserRoutes } from "./routes/UserRoutes";
+import { CartRoutes } from "./routes/CartRoutes";
 import { RouteModelServer } from "./entity/RoutesModel";
 import * as swaggerDocs from "../swagger.json";
 import cors from "cors";
@@ -14,7 +15,7 @@ app.use(urlencoded({ extended: true }));
 app.use(json({ limit: "10mb" }));
 app.use(cors());
 
-const Routers = [UserRoutes, ProductRoutes];
+const Routers = [UserRoutes, ProductRoutes, CartRoutes];
 
 Routers.forEach((router: any) => {
   router.forEach((route: RouteModelServer) => {
