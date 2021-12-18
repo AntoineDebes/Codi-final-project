@@ -12,17 +12,7 @@ import Api from "./API";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { setAppContext } = useAppContext();
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
-
-  const fetchCart = () => {
-    Api({ method: "get", fetchApiUrl: "carts" }).then((res: any) => {
-      setAppContext(res.data.result);
-    });
-  };
 
   Axios.interceptors.request.use((res: any) => {
     if (res.url.match(/userLogin$/)) return res;

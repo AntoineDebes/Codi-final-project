@@ -5,11 +5,11 @@ import query from "./db";
 async function AllCart(req: GetUserAuthInfoRequest) {
   const { userID } = req;
 
-  const result = await query(`SELECT * FROM cart_product WHERE user_id=?`, [
+  const result = await query(`SELECT * from cart_product WHERE user_id=?`, [
     userID,
   ]);
 
-  if (!!result.length) {
+  if (result) {
     return { message: "success", result };
   }
 
@@ -65,9 +65,12 @@ async function UpdateCart(req: GetUserAuthInfoRequest) {
 }
 
 async function DeleteCart(req: GetUserAuthInfoRequest) {
+  const { id }: any = req.body;
   const { userID } = req;
-
-  const result = await query(`DELETE FROM cart WHERE ID=?`, [userID]);
+  const result = await query(
+    `DELETE FROM cart_product WHERE ID=? AND user_id=?`,
+    [id, userID]
+  );
 
   if (result.affectedRows) {
     return {

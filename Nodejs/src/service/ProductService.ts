@@ -30,6 +30,14 @@ async function GetAllProduct() {
   }
   throw new Error(unkownError);
 }
+async function GetOneProduct(productId: number | string) {
+  const result = await query(`SELECT * FROM product WHERE ID = ${productId}`);
+
+  if (result.length) {
+    return result[0];
+  }
+  throw new Error(unkownError);
+}
 
 async function CreateProduct(req: ProductModel) {
   const {
@@ -101,5 +109,6 @@ const UserCrud = {
   GetAllProduct,
   CreateProduct,
   DeleteProduct,
+  GetOneProduct,
 };
 export default UserCrud;
