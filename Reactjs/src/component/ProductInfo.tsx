@@ -81,13 +81,16 @@ function ProductInfo({
               <p>{packaging}</p>
             </div>
             <div>
+              <div className="product-info__container__product__quantity">
               <p>{quantityOfProduct}</p>
-              <span onClick={() => incrementQuantity()}>Increment</span>
-              <span onClick={() => decrementQuantity()}>Decrement</span>
+              <div className="product-info__container__product__quantity__arrows">
+              <span onClick={() => incrementQuantity()}><i className="fas fa-sort-up"></i></span>
+              <span onClick={() => decrementQuantity()}><i className="fas fa-sort-down"></i></span>
+              </div>
+              </div>
             </div>
             <div>
-              <button type="button" onClick={addProductToCart}>
-                {" "}
+              <button type="button" onClick={addProductToCart} className="add-product__form__button">
                 Add to cart
               </button>
             </div>

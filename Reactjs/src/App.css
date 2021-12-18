@@ -21,6 +21,7 @@
 
 .wrapper {
   display: grid;
+  grid-template-rows: 3.5em auto ;
   min-height: 100vh;
   height: 100%;
   position: relative;
@@ -29,7 +30,6 @@
 }
 
 .wrapper__container {
-  height: 100%;
   width:100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -68,4 +68,10 @@
   width: 100%;
   display: grid;
   place-items: center;
+}
+
+@media(min-width: 740px){
+.wrapper {
+  grid-template-rows: 3.5em auto 10em;
+}
 }

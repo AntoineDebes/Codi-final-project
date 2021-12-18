@@ -95,7 +95,7 @@
   border-radius: 6px;
 }
 
-.wrapper__signin__form > button {
+.wrapper__signin__form__button {
   border: none;
   background: linear-gradient(
     to right,

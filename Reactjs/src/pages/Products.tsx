@@ -32,7 +32,7 @@ function Products() {
       });
   }, []);
   return (
-    <div className="wrapper__container">
+    <div className="wrapper__container products__grid__container">
       <div className="wrapper__container__header">
         <h1>Our products</h1>
       </div>

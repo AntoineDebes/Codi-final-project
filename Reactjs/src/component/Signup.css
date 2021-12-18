@@ -18,6 +18,10 @@
   outline: none;
 }
 
+.wrapper__signin__form__input__container input {
+  border: 0;
+}
+
 .wrapper__signup__terms {
   display: flex;
   flex-direction: row;

@@ -38,99 +38,100 @@ function ProductUpdateRemove() {
   }, []);
   return (
     <>
+    <main className="wrapper__addproduct">
       <div className="wrapper__addProduct__container">
         <h2 className="wrapper__addProduct__title">Hero Section</h2>
-      <div className="wrapper__container__homepage__hot-sales__container">
-        {products?.hero?.map(
-          ({
-            name,
-            price,
-            content,
-            ImageFormat,
-            Base64,
-            imageAlt,
-            ID,
-          }: HomepageCardProps) => {
-            return (
-              <HomepageCard
-                content={content}
-                ImageFormat={ImageFormat}
-                Base64={Base64}
-                imageAlt={imageAlt}
-                price={price}
-                name={name}
-                ID={ID}
-                deleteProduct={deleteProduct}
-                key={ID}
-              />
-            );
-          }
-        )}
-      </div>
+        <div className="wrapper__container__homepage__hot-sales__container">
+          {products?.hero?.map(
+            ({
+              name,
+              price,
+              content,
+              ImageFormat,
+              Base64,
+              imageAlt,
+              ID,
+            }: HomepageCardProps) => {
+              return (
+                <HomepageCard
+                  content={content}
+                  ImageFormat={ImageFormat}
+                  Base64={Base64}
+                  imageAlt={imageAlt}
+                  price={price}
+                  name={name}
+                  ID={ID}
+                  deleteProduct={deleteProduct}
+                  key={ID}
+                />
+              );
+            }
+          )}
+        </div>
       </div>
 
       <div className="wrapper__addProduct__container">
         <h2 className="wrapper__addProduct__title">Sales Section</h2>
-      <div className="wrapper__container__homepage__hot-sales__container">
-        {products?.sales?.map(
-          ({
-            name,
-            price,
-            content,
-            ImageFormat,
-            Base64,
-            imageAlt,
-            ID,
-          }: HomepageCardProps) => {
-            return (
-              <HomepageCard
-                content={content}
-                ImageFormat={ImageFormat}
-                Base64={Base64}
-                imageAlt={imageAlt}
-                price={price}
-                name={name}
-                key={ID}
-                ID={ID}
-                deleteProduct={(e: string) => deleteProduct(e)}
-              />
-            );
-          }
-        )}
-      </div>
+        <div className="wrapper__container__homepage__hot-sales__container">
+          {products?.sales?.map(
+            ({
+              name,
+              price,
+              content,
+              ImageFormat,
+              Base64,
+              imageAlt,
+              ID,
+            }: HomepageCardProps) => {
+              return (
+                <HomepageCard
+                  content={content}
+                  ImageFormat={ImageFormat}
+                  Base64={Base64}
+                  imageAlt={imageAlt}
+                  price={price}
+                  name={name}
+                  key={ID}
+                  ID={ID}
+                  deleteProduct={(e: string) => deleteProduct(e)}
+                />
+              );
+            }
+          )}
+        </div>
       </div>
 
       <div className="wrapper__addProduct__container">
-        <h2  className="wrapper__addProduct__title">Normal Section</h2>
-      <div className="wrapper__container__homepage__hot-sales__container">
-        {products?.normal?.map(
-          ({
-            name,
-            price,
-            content,
-            ImageFormat,
-            Base64,
-            imageAlt,
-            ID,
-          }: HomepageCardProps) => {
-            return (
-              <HomepageCard
-                content={content}
-                ImageFormat={ImageFormat}
-                Base64={Base64}
-                imageAlt={imageAlt}
-                price={price}
-                ID={ID}
-                name={name}
-                key={ID}
-                deleteProduct={(e: string) => deleteProduct(e)}
-              />
-            );
-          }
-        )}
+        <h2 className="wrapper__addProduct__title">Normal Section</h2>
+        <div className="wrapper__container__homepage__hot-sales__container">
+          {products?.normal?.map(
+            ({
+              name,
+              price,
+              content,
+              ImageFormat,
+              Base64,
+              imageAlt,
+              ID,
+            }: HomepageCardProps) => {
+              return (
+                <HomepageCard
+                  content={content}
+                  ImageFormat={ImageFormat}
+                  Base64={Base64}
+                  imageAlt={imageAlt}
+                  price={price}
+                  ID={ID}
+                  name={name}
+                  key={ID}
+                  deleteProduct={(e: string) => deleteProduct(e)}
+                />
+              );
+            }
+          )}
+        </div>
       </div>
-      </div>
-
+      </main>
     </>
   );
 }

@@ -1,19 +1,20 @@
 .wrapper__add--product__form {
   display: flex;
-  min-height: 85vh;
   height: 100%;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  padding-bottom: 1.5em;
 }
 
-.wrapper__add--product__form > div {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
+.add-product-grid__inputs__container{
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap:1em
 }
+
 
 .wrapper__add--product__form > div > div > div {
   display: flex;
@@ -27,4 +28,55 @@
 
 .wrapper__add--product__form__product__placement > * {
   width: 100%;
+}
+
+.admin-add-product__title{
+  text-align: center;
+  padding-top: 2em;
+}
+
+.wrapper__add--product__form__select{
+  width:100%;
+}
+
+.upload-iamge-container{
+  position: relative;
+}
+
+.upload-iamge-container::before{
+  position: absolute;
+  content:"";
+  bottom:2px;
+  left:0;
+  height:0.4em;
+  width:100%;
+  opacity: 0.4;
+  background-image:linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  ) ;
+}
+
+.add-product__form__button{
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    rgb(163, 116, 163)
+  );
+  color: white;
+  padding: 0.5em 3em;
+  align-self: center;
+}
+
+@media(min-width: 740px){
+.add-product-grid__inputs__container{
+  grid-template-columns: repeat(2, 1fr);
+}
+.wrapper__add--product__form {
+  padding-bottom: 0;
+}
+
 }
