@@ -12,7 +12,7 @@ function NavbarComponent() {
     setIsUserLogedIn,
   } = useIsAuthContext();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const { appContext } = useAppContext();
+  const { cartItems } = useAppContext();
   const userName = localStorage.getItem("Username") ?? "";
 
   const navDropdownTitle = (
@@ -55,9 +55,9 @@ function NavbarComponent() {
                 <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
                   <Link to="/cart" className="navbar__cart-length__container">
                     Cart
-                    {!!appContext?.length ? (
+                    {!!cartItems?.length ? (
                       <div className="navbar__cart-length__circle">
-                        {appContext?.length}
+                        {cartItems?.length}
                       </div>
                     ) : null}
                   </Link>

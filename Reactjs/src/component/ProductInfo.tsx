@@ -1,8 +1,9 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "./ProductInfo.css";
 
 import { useClickOutside } from "../context/ClickOutside";
 import Api from "../API";
+import { useAppContext } from "../context/AppContext";
 
 interface ProductInfoProps {
   imageAlt: string;
@@ -34,6 +35,7 @@ function ProductInfo({
   ID,
 }: ProductInfoProps) {
   const [quantityOfProduct, setQuantityOfProduct] = useState<number>(0);
+  const { addProductToCart } = useAppContext();
 
   const incrementQuantity = () => {
     return setQuantityOfProduct(quantityOfProduct + 1);
@@ -44,13 +46,13 @@ function ProductInfo({
     return setQuantityOfProduct(quantityOfProduct - 1);
   };
 
-  const addProductToCart = () => {
-    let params = {
-      quantity: quantityOfProduct,
-      product_ID: ID,
-    };
-    Api({ method: "post", fetchApiUrl: "carts", data: "" });
-  };
+  // const addProductToCart = () => {
+  //   let params = {
+  //     quantity: quantityOfProduct,
+  //     product_ID: ID,
+  //   };
+  //   Api({ method: "post", fetchApiUrl: "carts", data: params });
+  // };
 
   const domNode = useClickOutside(() => {
     setIsProductPopupOn(false);
@@ -86,7 +88,15 @@ function ProductInfo({
               <span onClick={() => decrementQuantity()}>Decrement</span>
             </div>
             <div>
-              <button type="button" onClick={addProductToCart}>
+              <button type="button" disabled={quantityOfProduct === 0} onClick={() => {
+                if (addProductToCart !== undefined) {
+                  addProductToCart({
+                    ID,
+                    quantityOfProduct
+                  })
+                }
+
+              }}>
                 {" "}
                 Add to cart
               </button>

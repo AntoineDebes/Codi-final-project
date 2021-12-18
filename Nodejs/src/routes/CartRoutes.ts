@@ -19,12 +19,14 @@ export const CartRoutes = [
   {
     method: "put",
     route: "/carts",
+    middleware: [jwtVerify],
     controller: CartController,
     action: "update",
   },
   {
     method: "delete",
     route: "/carts",
+    middleware: [jwtVerify],
     controller: CartController,
     action: "delete",
   },
