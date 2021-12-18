@@ -71,36 +71,48 @@ function ProductInfo({
             <img src={`${ImageFormat},${Base64}`} alt="Product pic" />
           </div>
           <div className="product-info__container__product__container">
-            <div className="product-info__container__product__container__title">
-              <h4>{title}</h4>
+          <div className="product-info__container__product__container__content">
+              <h3 className="product-info__container__product__container__content__name">{title}</h3>
+              <p>Description</p>
               <p>{content}</p>
-            </div>
-            <div className="product-info__container__product__container__content">
+              <p>Serial Number</p>
               <p>{serial_number}</p>
+              <p>Price</p>
               <p>{price}</p>
+              <p>Quantity</p>
               <p>{quantity}</p>
+              <p>Transport</p>
               <p>{transport}</p>
+              <p>Packaging</p>
               <p>{packaging}</p>
             </div>
             <div>
+              <p className="product-info__quantity__title">Quantity</p>
               <div className="product-info__container__product__quantity">
-              <p>{quantityOfProduct}</p>
-              <div className="product-info__container__product__quantity__arrows">
-              <span onClick={() => incrementQuantity()}><i className="fas fa-sort-up"></i></span>
-              <span onClick={() => decrementQuantity()}><i className="fas fa-sort-down"></i></span>
-              </div>
+                <p>{quantityOfProduct}</p>
+                <div className="product-info__container__product__quantity__arrows">
+                  <span onClick={() => incrementQuantity()}>
+                    <i className="fas fa-sort-up"></i>
+                  </span>
+                  <span onClick={() => decrementQuantity()}>
+                    <i className="fas fa-sort-down"></i>
+                  </span>
+                </div>
               </div>
             </div>
             <div>
-              <button type="button" disabled={quantityOfProduct === 0} onClick={() => {
-                if (addProductToCart !== undefined) {
-                  addProductToCart({
-                    ID,
-                    quantityOfProduct
-                  })
-                }
-
-              }}>
+              <button
+                type="button"
+                disabled={quantityOfProduct === 0}
+                onClick={() => {
+                  if (addProductToCart !== undefined) {
+                    addProductToCart({
+                      ID,
+                      quantityOfProduct,
+                    });
+                  }
+                }}
+              >
                 {" "}
                 Add to cart
               </button>

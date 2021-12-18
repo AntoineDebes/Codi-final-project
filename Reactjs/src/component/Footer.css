@@ -28,7 +28,7 @@
 .wrapper__footer__container__logo {
   position: relative;
   height: 5em;
-  width: 5em;
+  width: 100%;
   border: 1px solid var(--white-100);
 }
 

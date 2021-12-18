@@ -31,11 +31,10 @@ export default function Cart() {
                 <p>Total TTC</p>
               </div>
               <button type="button" onClick={() => {
-                debugger
                 if (removeProductFromCart !== undefined) {
                   removeProductFromCart(cartItem.ID)
                 }
-              }}>Remove from cart {cartItem.ID}</button>
+              }}>Remove</button>
             </div>
           </div>
         )

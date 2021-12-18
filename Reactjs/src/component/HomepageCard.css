@@ -11,6 +11,7 @@
   font-size: 1rem;
   padding-bottom: 2.8em;
   position: relative;
+  cursor: pointer;
 }
 
 .homepage__container__cards__img__container {
@@ -41,6 +42,10 @@
   right: 0;
   padding: 0.4em;
   color: var(--black-100);
+}
+
+.homepage__container__cards__delete-price--container{
+  padding-top: 1.5em;
 }
 
 .homepage__container__cards__img__container__delete {

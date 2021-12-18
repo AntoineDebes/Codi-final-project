@@ -43,24 +43,24 @@ function NavbarComponent() {
                 <Link to="/">Home</Link>
                 <Link to="/products">Products</Link>
                 {isAdmin ? (
-                  <NavDropdown title={"Dashboard"} id="basic-nav-dropdown">
-                    <Link to="/addadminproducts" className="navbar__cart-length__container">Add Products</Link>
-                    <Link to="/productupdateremove" className="navbar__cart-length__container">
-                      Delete/update Products
-                    </Link>
+                  <NavDropdown title={"Dashboard"} id="basic-nav-dropdown" >
+                    <Nav.Link href="/addadminproducts" className="navbar__cart-length__container">Add Products</Nav.Link>
+                    <Nav.Link href="/productupdateremove" className="navbar__cart-length__container">
+                      Delete Products
+                    </Nav.Link>
                   </NavDropdown>
                 ) : null}
               </Nav>
               {isUserAuth ? (
                 <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
-                  <Link to="/cart" className="navbar__cart-length__container">
+                  <Nav.Link href="/cart" className="navbar__cart-length__container">
                     Cart
                     {!!cartItems?.length ? (
                       <div className="navbar__cart-length__circle">
                         {cartItems?.length}
                       </div>
                     ) : null}
-                  </Link>
+                  </Nav.Link>
                   <p onClick={handleSignOut} className="navbar__logout__btn">
                     Logout
                   </p>

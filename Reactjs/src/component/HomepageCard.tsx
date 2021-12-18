@@ -19,9 +19,8 @@ function HomepageCard({
       </div>
       <div className="homepage__container__cards__img__container">
         <img src={`${ImageFormat},${Base64}`} alt={imageAlt} />
-       
-
       </div>
+      <div className="homepage__container__cards__delete-price--container">
       {deleteProduct && (
           <div
             className="homepage__container__cards__img__container__delete"
@@ -31,6 +30,7 @@ function HomepageCard({
           </div>
         )}
         <p className="homepage__container__cards__img__price">{price && "$"}{price}</p>
+        </div>
     </div>
   );
 }
