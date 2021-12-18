@@ -21,6 +21,7 @@ function Homepage(): JSX.Element {
 
   return (
     <>
+    <main>
       <div className="wrapper__container__hero__container">
         <Carousel className="wrapper__container__hero">
           {cards?.hero.map(
@@ -83,6 +84,7 @@ function Homepage(): JSX.Element {
           )}
         </div>
       </div>
+      </main>
     </>
   );
 }

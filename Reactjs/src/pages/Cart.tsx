@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useIsAuthContext } from "../context/IsAuth";
-import "./Cart.css"
+import "./Cart.css";
 import { Toshiba } from "../images";
 import Api from "../API";
 import { toast } from "react-toastify";

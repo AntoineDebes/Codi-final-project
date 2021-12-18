@@ -23,12 +23,16 @@ function App() {
   Axios.interceptors.response.use(
     (res: any) => {
       if (res || res.status !== 200) {
-        setIsLoading(false);
+        setTimeout(()=>{
+          setIsLoading(false);
+        },1000)    
       }
       return res;
     },
     (err: any) => {
-      setIsLoading(false);
+      setTimeout(()=>{
+        setIsLoading(false);
+      },1000)
       return Promise.reject(err);
     }
   );
@@ -48,7 +52,7 @@ function App() {
       />
       {isLoading && (
         <div className="loading__popup__container">
-          <BounceLoader loading={isLoading} size={150} color="purple" />
+          <BounceLoader loading={isLoading} size={150} color="var(--primary-color)" />
         </div>
       )}
 

@@ -10,5 +10,18 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 240px));
   grid-template-rows: auto;
   place-content: center;
-  gap: 1em;
+  gap: 2em;
+}
+
+.products__grid__container {
+  grid-template-rows: 6em auto;
+}
+
+@media (min-width: 740px) {
+  .products__grid__container {
+    grid-template-rows: 0.4em auto;
+  }
+  .wrapper__container__products {
+    gap: 1em;
+  }
 }

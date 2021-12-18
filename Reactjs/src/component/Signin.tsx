@@ -114,7 +114,7 @@ function Signin({ setIsLoginOpen }: SigninProps) {
                 Register
               </p>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className="wrapper__signin__form__button">Login</button>
           </form>
         )}
       </div>
