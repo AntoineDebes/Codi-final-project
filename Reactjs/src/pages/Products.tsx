@@ -56,7 +56,7 @@ function Products() {
                 ImageFormat={ImageFormat}
                 Base64={Base64}
                 imageAlt="Image"
-                title={name}
+                name={name}
                 price={price}
                 key={ID}
                 ID={ID}
@@ -87,7 +87,7 @@ function Products() {
                 ImageFormat={ImageFormat}
                 Base64={Base64}
                 imageAlt="Image"
-                title={name}
+                name={name}
                 ID={ID}
                 price={price}
                 key={ID}

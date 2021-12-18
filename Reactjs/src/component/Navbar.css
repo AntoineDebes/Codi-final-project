@@ -76,6 +76,10 @@ Fucking with the bootstrap css config
   padding-top: 0.5em;
 }
 
+.navbar__cart-length__container:hover{
+  color:var(--primary-color)
+}
+
 .navbar__cart-length__container {
   display: flex !important;
   justify-content: space-between;
@@ -104,6 +108,12 @@ Fucking with the bootstrap css config
 .navbar__logout__btn {
   width: 100%;
   padding: 0.3em 0;
+  cursor: pointer;
+}
+
+.navbar__logout__btn:hover {
+  background-color: var(--primary-color);
+  border-radius:6px ;
 }
 
 @media (min-width: 575px) {

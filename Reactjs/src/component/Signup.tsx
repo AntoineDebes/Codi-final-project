@@ -89,11 +89,12 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
       <div>
         <div>
           <div>
-            <label>First name</label>
+            <label htmlFor="first-name">First name</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="text"
                 {...register("firstName", { required: true })}
+                id="first-name"
               />
             </div>
             <div>
@@ -104,11 +105,12 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
           </div>
 
           <div>
-            <label>Last name</label>
+            <label htmlFor="last-name">Last name</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="text"
                 {...register("lastName", { required: true })}
+                id="last-name"
               />
             </div>
             <div>
@@ -119,11 +121,12 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
           </div>
 
           <div>
-            <label>Username</label>
+            <label htmlFor="username">Username</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="text"
                 {...register("userName", { required: true })}
+                id="username"
               />
             </div>
             <div>
@@ -162,10 +165,11 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
         </div>
         <div>
           <div>
-            <label>Phone</label>
+            <label  htmlFor="phone">Phone</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="text"
+                id="phone"
                 {...register("phone", {
                   required: true,
                   pattern: {
@@ -189,10 +193,11 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
           </div>
 
           <div>
-            <label>Address</label>
+            <label  htmlFor="address">Address</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="text"
+                id="address"
                 {...register("address", {
                   required: true,
                 })}
@@ -206,10 +211,11 @@ function Signup({ setIsRegisterOpen, setIsLoginOpen, domNode }: SignupProps) {
           </div>
 
           <div>
-            <label>Password</label>
+            <label  htmlFor="password">Password</label>
             <div className="wrapper__signin__form__input__container">
               <input
                 type="password"
+                id="password"
                 placeholder="Password"
                 {...register("password", { required: true, minLength: 8 })}
               />

@@ -28,7 +28,7 @@ async function CreateUser(req: Request) {
     `INSERT INTO users
       (first_name, last_name, user_name, phone, email, password, address, verified, isAdmin) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, ?, ?)`,
+      (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [firstName, lastName, userName, phone, email, hashedPassword, address, 0, 0]
   );
   const targetedUser: any = await query("SELECT ID FROM users WHERE email=?", [

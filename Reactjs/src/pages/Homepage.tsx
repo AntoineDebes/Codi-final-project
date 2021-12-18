@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import "./Homepage.css";
-import { HeroImageOne } from "../images";
 import HomepageCard from "../component/HomepageCard";
 import Api from "../API";
 import Footer from "../component/Footer";
 import { HomepageCardProps } from "../Models/DataModels/HomepageCardProps";
+import ProductCard from "../component/ProductCard";
+import { ProductCardProps } from "../Models/DataModels/ProductCardModel";
 
 function Homepage(): JSX.Element {
   const [cards, setCards] = useState<any>(undefined);
@@ -51,30 +52,37 @@ function Homepage(): JSX.Element {
         <div className="wrapper__container__homepage__hot-sales__container">
           {cards?.sales?.map(
             ({
+              ID,
               content,
+              name,
+              price,
+              packaging,
+              serial_number,
+              quantity,
+              transport,
               ImageFormat,
               Base64,
-              imageAlt,
-              price,
-              name,
-              ID,
-            }: HomepageCardProps) => {
+            }: ProductCardProps) => {
               return (
-                <HomepageCard
-                  content={content}
-                  ImageFormat={ImageFormat}
-                  Base64={Base64}
-                  imageAlt={imageAlt}
-                  price={price}
-                  name={name}
-                  key={ID}
+                <ProductCard
+                content={content}
+                ImageFormat={ImageFormat}
+                Base64={Base64}
+                imageAlt="Image"
+                name={name}
+                price={price}
+                key={ID}
+                ID={ID}
+                packaging={packaging}
+                serial_number={serial_number}
+                quantity={quantity}
+                transport={transport}
                 />
               );
             }
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 }

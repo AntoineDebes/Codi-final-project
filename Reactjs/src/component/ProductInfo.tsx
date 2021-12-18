@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import "./ProductInfo.css";
 
 import { useClickOutside } from "../context/ClickOutside";

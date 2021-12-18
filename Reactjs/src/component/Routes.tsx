@@ -11,6 +11,7 @@ import Homepage from "../pages/Homepage";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
 import EmailVerification from "./EmailVerification";
+import Footer from "./Footer";
 
 function Routes() {
   return (
@@ -19,19 +20,21 @@ function Routes() {
       <ReactRoutes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/addadminproducts" element={<AddProductPage />} />
           <Route
             path="/productupdateremove"
             element={<ProductUpdateRemove />}
           />
+        <Route path="/cart" element={<Cart />} />
         </Route>
         <Route
           path="/verifyemail/:authtoken"
           element={<EmailVerification />}
         ></Route>
       </ReactRoutes>
+      <Footer />
+
     </Router>
   );
 }

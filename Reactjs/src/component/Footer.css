@@ -14,10 +14,14 @@
   background-color: inherit;
   color: var(--primary-color);
   margin: 0 auto;
-  height: 8em;
+  min-height: 8em;
+  height:100%;
   display: flex;
+  flex-direction: column;
+  gap:0.5em;
+  justify-content: space-between;
   color: var(--white-100);
-  align-items: flex-start;
+  align-items: center;
 }
 
 .wrapper__footer__container__logo {
@@ -76,4 +80,11 @@
   justify-content: flex-start;
   gap: 0.4em;
   align-items: center;
+}
+
+@media(min-width:740px){
+  .wrapper__footer__container{
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }

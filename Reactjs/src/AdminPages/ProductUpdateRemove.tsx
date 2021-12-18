@@ -38,9 +38,8 @@ function ProductUpdateRemove() {
   }, []);
   return (
     <>
-      <div>
-        <h2>Hero Section</h2>
-      </div>
+      <div className="wrapper__addProduct__container">
+        <h2 className="wrapper__addProduct__title">Hero Section</h2>
       <div className="wrapper__container__homepage__hot-sales__container">
         {products?.hero?.map(
           ({
@@ -68,9 +67,10 @@ function ProductUpdateRemove() {
           }
         )}
       </div>
-      <div>
-        <h2>Sales Section</h2>
       </div>
+
+      <div className="wrapper__addProduct__container">
+        <h2 className="wrapper__addProduct__title">Sales Section</h2>
       <div className="wrapper__container__homepage__hot-sales__container">
         {products?.sales?.map(
           ({
@@ -98,9 +98,10 @@ function ProductUpdateRemove() {
           }
         )}
       </div>
-      <div>
-        <h2>Normal Section</h2>
       </div>
+
+      <div className="wrapper__addProduct__container">
+        <h2  className="wrapper__addProduct__title">Normal Section</h2>
       <div className="wrapper__container__homepage__hot-sales__container">
         {products?.normal?.map(
           ({
@@ -128,6 +129,8 @@ function ProductUpdateRemove() {
           }
         )}
       </div>
+      </div>
+
     </>
   );
 }

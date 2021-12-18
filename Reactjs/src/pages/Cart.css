@@ -1,0 +1,36 @@
+.cart__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3em;
+  max-width: var(--max-main-width);
+  margin: 0 auto;
+  padding-top: 3.5em;
+  width:100%;
+}
+
+.cart__card__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+  background-color: var(--white-100);
+  border-radius: 16px;
+  padding: 0 0.5em;
+}
+
+.cart__card__img__container {
+  height: 15em;
+  width: 17%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cart__card__img__container > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}

@@ -1,0 +1,9 @@
+
+
+.wrapper__addProduct__title{
+    text-align: center;
+    padding:1.4em 0
+}
+.wrapper__addProduct__container:last-child{
+padding-bottom:5rem;
+}

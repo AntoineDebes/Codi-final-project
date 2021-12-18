@@ -15,10 +15,12 @@
   --black-300: hsl(96, 95%, 7%);
   --black-400: hsl(96, 100%, 1%);
   --max-width: 1770px;
+  --max-main-width: 1440px;
   --hero-width: 1920px;
 }
 
 .wrapper {
+  display: grid;
   min-height: 100vh;
   height: 100%;
   position: relative;
@@ -28,10 +30,11 @@
 
 .wrapper__container {
   height: 100%;
+  width:100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
-  padding: 4em 1em;
+  padding: 0 1em 4em 1em;
   margin: 0 auto;
   max-width: var(--max-width);
 }

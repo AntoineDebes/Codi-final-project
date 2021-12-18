@@ -1,24 +1,11 @@
 import { useState } from "react";
 import "./ProductCard.css";
 import ProductInfo from "./ProductInfo";
-
-interface ProductCardProps {
-  imageAlt: string;
-  title: string;
-  content: string;
-  price: string;
-  packaging: string;
-  serial_number: string;
-  quantity: string;
-  transport: string;
-  ImageFormat: string;
-  Base64: string;
-  ID: string;
-}
+import {ProductCardProps} from "../Models/DataModels/ProductCardModel"
 
 function ProductCard({
   imageAlt,
-  title,
+  name,
   content,
   price,
   ImageFormat,
@@ -33,10 +20,11 @@ function ProductCard({
 
   return (
     <>
+    
       {isProductPopupOn ? (
         <ProductInfo
           imageAlt={imageAlt}
-          title={title}
+          title={name}
           content={content}
           price={price}
           packaging={packaging}
@@ -49,20 +37,18 @@ function ProductCard({
           setIsProductPopupOn={setIsProductPopupOn}
         />
       ) : null}
-      <div
-        onClick={() => {
+      <div  onClick={() => {
           setIsProductPopupOn(true);
-        }}
-        className="wrapper__container__products__cards"
-      >
-        <div className="products__container__cards__img__container">
+        }} className="wrapper__container__homepage__cards">
+        <div className="homepage__container__homepage__content">
+          <h3>{name}</h3>
+        </div>
+        <div className="homepage__container__cards__img__container">
           <img src={`${ImageFormat},${Base64}`} alt={imageAlt} />
-          <p>{price}</p>
+          
         </div>
-        <div className="products__container__cards__content">
-          <h4>{title}</h4>
-          <p>{content}</p>
-        </div>
+        <p className="homepage__container__cards__img__price">${price}</p>
+
       </div>
     </>
   );

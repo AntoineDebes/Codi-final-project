@@ -21,6 +21,13 @@ function Footer() {
           </div>
         </div>
         <div className="wrapper__footer__container__location">
+          <h5>Social Media</h5>
+          <div>
+          <i className="fab fa-github"></i>
+            <p>Github</p>
+          </div>
+        </div>
+        <div className="wrapper__footer__container__location">
           <h5>Location</h5>
           <div>
             <i className="fas fa-map-marker-alt"></i>

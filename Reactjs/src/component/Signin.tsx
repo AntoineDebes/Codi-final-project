@@ -74,10 +74,11 @@ function Signin({ setIsLoginOpen }: SigninProps) {
               <i className="fas fa-times" />
             </div>
             <div>
-              <label>Email address</label>
+              <label htmlFor="email">Email address</label>
               <div className="wrapper__signin__form__input__container">
                 <input
                   type="email"
+                  id="email"
                   placeholder="Email"
                   {...register("email", { required: true })}
                 />
@@ -89,10 +90,11 @@ function Signin({ setIsLoginOpen }: SigninProps) {
               )}
             </div>
             <div>
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <div className="wrapper__signin__form__input__container">
                 <input
                   type="password"
+                  id="password"
                   placeholder="Password"
                   {...register("password", { required: true })}
                 />

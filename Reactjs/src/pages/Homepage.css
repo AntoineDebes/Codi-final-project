@@ -34,15 +34,17 @@
 }
 
 .wrapper__container__hompage__hot-sales__title {
-  padding: 0.8em 0;
+  padding: 1.8em 0;
 }
 
 .wrapper__container__homepage__hot-sales__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(285px, 302px));
+  grid-template-columns: repeat(auto-fit, minmax(119px, 302px));
   place-content: center;
   grid-template-rows: auto;
   grid-gap: 2.5em;
   gap: 2.5em;
   grid-column: 1 /-1;
+  max-width: var(--max-main-width);
+  margin: 0 auto;
 }
