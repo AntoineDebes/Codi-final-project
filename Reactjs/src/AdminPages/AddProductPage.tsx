@@ -102,7 +102,7 @@ function AddProductPage() {
                     >
                       <option value="normal">Normal</option>
                       <option value="hero">Hero Section</option>
-                      <option value="hot">Hot Sales</option>
+                      <option value="sales">Hot Sales</option>
                     </select>
                   </div>
                 </div>
