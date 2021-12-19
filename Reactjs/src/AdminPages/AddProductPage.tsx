@@ -80,7 +80,7 @@ function AddProductPage() {
 
   return (
     <>
-      <main>
+      <main style={{ height: "max-content" }}>
         <h2 className="admin-add-product__title">Add Product</h2>
         <form
           onSubmit={handleSubmit(onSubmitHandler)}
@@ -128,8 +128,8 @@ function AddProductPage() {
                   <span className="text-danger">This field is required</span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>
                   Serial Number{productPlacement !== "hero" ? "*" : ""}
@@ -148,8 +148,8 @@ function AddProductPage() {
                   <span className="text-danger">This field is required</span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>Price{productPlacement !== "hero" ? "*" : ""}</label>
                 <div className="wrapper__signin__form__input__container">
@@ -174,8 +174,8 @@ function AddProductPage() {
                   </span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>Quantity{productPlacement !== "hero" ? "*" : ""}</label>
                 <div className="wrapper__signin__form__input__container">
@@ -200,8 +200,8 @@ function AddProductPage() {
                   </span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>Packaging{productPlacement !== "hero" ? "*" : ""}</label>
                 <div className="wrapper__signin__form__input__container">
@@ -226,8 +226,8 @@ function AddProductPage() {
                   </span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>Transport{productPlacement !== "hero" ? "*" : ""}</label>
                 <div className="wrapper__signin__form__input__container">
@@ -252,8 +252,8 @@ function AddProductPage() {
                   </span>
                 )}
               </div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div>
                 <label>Description*</label>
                 <div className="wrapper__signin__form__input__container">
