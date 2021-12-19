@@ -23,16 +23,12 @@ function App() {
   Axios.interceptors.response.use(
     (res: any) => {
       if (res || res.status !== 200) {
-        setTimeout(()=>{
           setIsLoading(false);
-        },1000)    
       }
       return res;
     },
     (err: any) => {
-      setTimeout(()=>{
         setIsLoading(false);
-      },1000)
       return Promise.reject(err);
     }
   );

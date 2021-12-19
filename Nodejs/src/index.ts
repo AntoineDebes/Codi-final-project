@@ -17,7 +17,6 @@ app.use(cors());
 
 const Routers = [UserRoutes, ProductRoutes, CartRoutes];
 
-
 Routers.forEach((router: any) => {
   router.forEach((route: RouteModelServer) => {
     (app as any)[route.method](
