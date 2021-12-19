@@ -21,7 +21,7 @@ function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
       },
       data, // data passed
       params,
-      timeout: 5000,
+      timeout: 30000,
     })
       .then((response) => {
         console.log(response);
