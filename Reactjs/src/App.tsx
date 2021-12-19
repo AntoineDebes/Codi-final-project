@@ -15,7 +15,7 @@ function App() {
 
 
   Axios.interceptors.request.use((res: any) => {
-    if (res.url.match(/userLogin$/)) return res;
+    if (res.url.match(/userLogin$|cart|products/)) return res;
     setIsLoading(true);
     return res;
   });
