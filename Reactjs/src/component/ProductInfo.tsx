@@ -71,7 +71,7 @@ function ProductInfo({
             <img src={`${ImageFormat},${Base64}`} alt="Product pic" />
           </div>
           <div className="product-info__container__product__container">
-          <div className="product-info__container__product__container__content">
+            <div className="product-info__container__product__container__content">
               <h3 className="product-info__container__product__container__content__name">{title}</h3>
               <p>Description</p>
               <p>{content}</p>
@@ -103,6 +103,7 @@ function ProductInfo({
             <div>
               <button
                 type="button"
+                className="wrapper__signin__form__button"
                 disabled={quantityOfProduct === 0}
                 onClick={() => {
                   if (addProductToCart !== undefined) {
@@ -110,6 +111,7 @@ function ProductInfo({
                       ID,
                       quantityOfProduct,
                     });
+                    setIsProductPopupOn(false);
                   }
                 }}
               >
