@@ -50,6 +50,7 @@
 
 #basic-navbar-nav {
   gap: 0.5em;
+  background-color: white;
 }
 
 /*
@@ -66,7 +67,6 @@ Fucking with the bootstrap css config
 }
 
 .basic-navbar-nav__dropdown {
-  margin-top: 0.2em;
   position: absolute;
   width: 100%;
   top: 100%;
@@ -83,13 +83,22 @@ Fucking with the bootstrap css config
 .navbar__cart-length__container {
   display: flex !important;
   justify-content: space-between;
+  gap:0.3em;
   align-items: center;
-  width: 100%;
   text-decoration: none;
   color: black;
 }
 
+.navbar__color__green:hover{
+  color:var(--primary-color) !important;
+}
+
+.navbar__cart-length__container:focus{
+  color:black
+}
+
 .navbar__cart-length__circle {
+  font-size: 0.8em;
   padding: 0 0.5em;
   border-radius: 50%;
   background-color: red;
@@ -109,16 +118,22 @@ Fucking with the bootstrap css config
   width: 100%;
   padding: 0.3em 0;
   cursor: pointer;
-  text-align: center;
+  padding:.5rem 1rem;
 }
 
 .navbar__logout__btn:hover {
-  background-color: var(--primary-color);
+  color: var(--primary-color);
   border-radius:6px ;
 }
 
 @media (min-width: 575px) {
   .basic-navbar-nav__dropdown {
     position: static;
+  }
+  .navbar__logout__btn {
+    text-align: center;
+  }
+  #basic-navbar-nav{
+    background-color: transparent;
   }
 }

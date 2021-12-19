@@ -1,2 +1,2 @@
-export { default as HeroImageOne } from "./HeroImageOne.webp";
-export { default as Toshiba } from "./Toshiba.png";
+export {default as LogoDark} from "./logo--dark.svg"
+export {default as LogoLight} from "./logo--light.svg"

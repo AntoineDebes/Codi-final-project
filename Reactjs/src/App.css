@@ -17,6 +17,7 @@
   --max-width: 1770px;
   --max-main-width: 1440px;
   --hero-width: 1920px;
+  font-size:calc(16px + 0.1vw)
 }
 
 .wrapper {
@@ -49,7 +50,7 @@
 }
 
 .wrapper__footer__container > div {
-  margin-right: 6vw;
+  margin-right: 0;
 }
 
 .links--dom {
@@ -73,5 +74,9 @@
 @media(min-width: 740px){
 .wrapper {
   grid-template-rows: 3.5em auto 10em;
+}
+.wrapper__footer__container > div {
+  margin-right: 6vw;
+
 }
 }

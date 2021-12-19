@@ -1,44 +1,66 @@
 import { useContext, useEffect, useState } from "react";
 import { useIsAuthContext } from "../context/IsAuth";
 import "./Cart.css";
-import { Toshiba } from "../images";
 import Api from "../API";
-import { toast } from "react-toastify";
 import { useAppContext } from "../context/AppContext";
 
 export default function Cart() {
   const [isUserCarts, setIsUserCarts] = useState<any>();
   const { cartItems, removeProductFromCart } = useAppContext();
-  return <div className="cart__container">
+  return (
+    <div className="cart__container">
+      {cartItems?.map(
+        ({
+          ID,
+          Quantity,
+          product: { ImageFormat, Base64, name, price, transport, packaging },
+        }: any) => {
+          let totalPriceHT = Quantity * price + +transport + +packaging;
+          let vat = totalPriceHT * 0.11;
 
-    {
-      cartItems?.map(cartItem => {
-        return (
-          <div key={cartItem.ID} className="cart__card__container">
-            <div className="cart__card__img__container">
-              <img src={`${cartItem.product.ImageFormat}, ${cartItem.product.Base64}`} alt="" />
-            </div>
-            <div>
-              <span>Quantity: </span> <span>{cartItem.Quantity}</span>
-            </div>
-            <div>
-              <div>
-                <h5>title: {cartItem.product.name}</h5>
-                <p>Price: {cartItem.Quantity * cartItem.product.price}</p>
-                <p>Transportation: {cartItem.product.transport}</p>
-                <p>Devlicery: {cartItem.product.packaging}</p>
-                <p>VAT</p>
-                <p>Total TTC</p>
+          return (
+            <div key={ID} className="cart__card__container">
+              <div className="cart__card__img__container">
+                <img src={`${ImageFormat}, ${Base64}`} alt="" />
               </div>
-              <button type="button" onClick={() => {
-                if (removeProductFromCart !== undefined) {
-                  removeProductFromCart(cartItem.ID)
-                }
-              }}>Remove</button>
+              <div>
+                <span>Quantity: </span>
+                <span>{Quantity}</span>
+              </div>
+              <div>
+                <div className="cart__card__content">
+                  <h5>title:</h5>
+                  <p>{name}</p>
+                  <p>Price:</p>
+                  <p>{Quantity * price}$</p>
+                  <p>Transportation:</p>
+                  <p>{transport}$</p>
+                  <p>Devlicery:</p>
+                  <p>{packaging}$</p>
+                  <p>VAT</p>
+                  <p>{vat}$</p>
+                  <p>Total TTC</p>
+                  <p>{totalPriceHT + vat}$</p>
+                </div>
+                <div className="button__cart__conatiner">
+                  <button
+                    type="button"
+                    className="button__submit__signup"
+                    onClick={() => {
+                      if (removeProductFromCart !== undefined) {
+                        removeProductFromCart(ID);
+                      }
+                    }}
+                  >
+                    Remove
+                  </button>
+                  <button disabled className="button__submit__signup">Checkout</button>
+                </div>
+              </div>
             </div>
-          </div>
-        )
-      })
-    }
-  </div>
+          );
+        }
+      )}
+    </div>
+  );
 }

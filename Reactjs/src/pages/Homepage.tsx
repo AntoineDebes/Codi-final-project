@@ -35,7 +35,7 @@ function Homepage(): JSX.Element {
                   />
 
                   <Carousel.Caption className="Carousel__caption__hero">
-                    <h3>{name}</h3>
+                    <h3 className="Carousel__caption__hero__title">{name}</h3>
                     <p>{content}</p>
                   </Carousel.Caption>
                 </Carousel.Item>

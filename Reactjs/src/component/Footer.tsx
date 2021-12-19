@@ -1,11 +1,12 @@
 import "./Footer.css";
+import {LogoLight} from "../images"
 
 function Footer() {
   return (
     <footer className="wrapper__footer">
       <div className="wrapper__footer__container">
         <div className="wrapper__footer__container__logo">
-          {/* <img src="" alt="" /> */}
+          <img src={LogoLight} alt="LOGO Light" />
         </div>
         <div className="wrapper__footer__container__contact">
           <h5>Contact us</h5>

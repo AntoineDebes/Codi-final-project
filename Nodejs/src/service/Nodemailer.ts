@@ -8,11 +8,13 @@ export const nodemailerEmailVerification = async ({
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "plunderplunder1@gmail.com",
-      pass: "Eliesamaha123",
+      user: process.env.NODEMAIL_EMAIL,
+      pass: process.env.NODEMAIL_PASSWORD,
     },
   });
 
+
+  
   const mailOptions = {
     from: "plunderplunder1@gmail.com",
     to: email,
