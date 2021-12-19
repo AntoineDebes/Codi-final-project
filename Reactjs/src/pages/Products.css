@@ -14,13 +14,10 @@
 }
 
 .products__grid__container {
-  grid-template-rows: 6em auto;
+  grid-template-rows: auto auto;
 }
 
 @media (min-width: 740px) {
-  .products__grid__container {
-    grid-template-rows: 0.4em auto;
-  }
   .wrapper__container__products {
     gap: 1em;
   }
