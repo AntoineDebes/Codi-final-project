@@ -87,6 +87,10 @@ a {
   align-items: center;
 }
 
+.wrapper__footer__container__location a:hover {
+  color: white;
+}
+
 @media (min-width: 740px) {
   .wrapper__footer__container {
     flex-direction: row;
