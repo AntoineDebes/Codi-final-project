@@ -76,8 +76,11 @@
   gap: 0.5em;
 }
 
-.wrapper__footer__container__location > div {
+.wrapper__footer__container__location > div,
+a {
   display: flex;
+  text-decoration: none;
+  color: white;
   flex-direction: row;
   justify-content: flex-start;
   gap: 0.4em;
@@ -92,13 +95,13 @@
     padding-left: 15vw;
     gap: 0.5em;
   }
-  .wrapper__footer__container__contact{
-    gap:1.5em
+  .wrapper__footer__container__contact {
+    gap: 1.5em;
   }
-  .wrapper__footer__container__location{
-    gap:1.5em
+  .wrapper__footer__container__location {
+    gap: 1.5em;
   }
-  .wrapper__footer__container__logo{
-    width:100%
+  .wrapper__footer__container__logo {
+    width: 100%;
   }
 }

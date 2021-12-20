@@ -6,17 +6,16 @@ export const nodemailerEmailVerification = async ({
   userName,
 }) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "Zoho",
     auth: {
       user: process.env.NODEMAIL_EMAIL,
       pass: process.env.NODEMAIL_PASSWORD,
     },
   });
+  console.log("token", token);
 
-
-  
   const mailOptions = {
-    from: "plunderplunder1@gmail.com",
+    from: "fps@antoinedebes.codes",
     to: email,
     subject: "Antoine Email Verification ",
     text: token,
@@ -215,7 +214,7 @@ export const nodemailerEmailVerification = async ({
             <tr>
               <td class="email-masthead">
                 <img
-                  src="http://plunder.nextengineeringlb.com/logo512.png"
+                  src="https://fps.antoinedebes.codes/logo--dark.svg"
                   class="email-masthead--smaller-img"
                 />
               </td>
@@ -236,12 +235,12 @@ export const nodemailerEmailVerification = async ({
                       <h1>Verify your email address</h1>
                       <p>Welcome ${userName}</p>
                       <p>
-                        Thanks for signing up for DPC! We're excited to have you
+                        Thanks for signing up for FPS! We're excited to have you
                         as a user.
                       </p>
                       <p>
                         Please click the button below to confirm your E-mail
-                        address registered in your DPC account.
+                        address registered in your FPS account.
                       </p>
                       <!-- Action -->
                       <table
@@ -254,14 +253,14 @@ export const nodemailerEmailVerification = async ({
                         <tr>
                           <td align="center">
                             <div>
-                              <a href="${token}" class="button button--blue"
+                              <a href="https://fps.antoinedebes.codes/verifyemail/${token}" class="button button--blue"
                                 >Verify Email</a
                               >
                             </div>
                           </td>
                         </tr>
                       </table>
-                      <p>Best Regards,<br />DPC Team</p>
+                      <p>Best Regards,<br />FPS Team</p>
                       <!-- Sub copy -->
                       <tr>
                         <table class="body-sub">

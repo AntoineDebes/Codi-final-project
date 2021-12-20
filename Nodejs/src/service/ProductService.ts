@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { GetProductInfoRequest } from "../entity/Request";
 import { ProductModel } from "../entity/ProductModel";
 import query from "./db";

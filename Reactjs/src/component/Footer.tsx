@@ -1,5 +1,5 @@
 import "./Footer.css";
-import {LogoLight} from "../images"
+import { LogoLight } from "../images";
 
 function Footer() {
   return (
@@ -23,17 +23,25 @@ function Footer() {
         </div>
         <div className="wrapper__footer__container__location">
           <h5>Social Media</h5>
-          <div>
-          <i className="fab fa-github"></i>
+          <a
+            href="https://github.com/AntoineDebes"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fab fa-github"></i>
             <p>Github</p>
-          </div>
+          </a>
         </div>
         <div className="wrapper__footer__container__location">
           <h5>Location</h5>
-          <div>
+          <a
+            href="https://goo.gl/maps/PiPiCwwbmZPzCAgn9"
+            target="_blank"
+            rel="noreferrer"
+          >
             <i className="fas fa-map-marker-alt"></i>
-            <p>Jdeideh, Mont-Lebanon</p>
-          </div>
+            <p>Jdeideh</p>
+          </a>
         </div>
       </div>
     </footer>

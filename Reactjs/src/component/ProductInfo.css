@@ -33,7 +33,7 @@
 
 .product-info__img__container {
   position: relative;
-  height:8em;
+  height: 8em;
   width: 8.35em;
   overflow: hidden;
 }
@@ -55,26 +55,34 @@
   gap: 1.4em;
 }
 
-.product-info__quantity__title{
+.product-info__quantity__title {
   text-align: center;
 }
 
-.product-info__container__product__quantity{
+.product-info__quantity-btn__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.product-info__container__product__quantity {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  width:6em;
-  height:3em;
-  border:1px solid black;
+  width: 6em;
+  height: 3em;
+  border: 1px solid black;
   border-radius: 6px;
-  padding-left:0.2em
+  padding-left: 0.2em;
 }
 
-.product-info__container__product__quantity__arrows{
-  position:absolute;
-  right:3px;
-  top:0;
+.product-info__container__product__quantity__arrows {
+  position: absolute;
+  right: 3px;
+  top: 0;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -83,7 +91,7 @@
 
 .product-info__container__product__container__title {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .product-info__container__product__container__title > * {
@@ -92,32 +100,33 @@
 
 .product-info__container__product__container__content {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  
-  place-items: center;
-  gap:0;
+  grid-template-columns: repeat(2, 1fr);
 
+  place-items: center;
+  gap: 0;
 }
 
-.product-info__container__product__container__content__name{
+.product-info__container__product__container__content__name {
   text-align: center;
   grid-column: 1 / -1;
 }
 
-@media(min-width:740px){
-  .product-info__container__product{
+@media (min-width: 740px) {
+  .product-info__container__product {
     flex-direction: row;
-    
   }
-  .product-info__img__container{
-    height:24em;
-    width:70%;
+  .product-info__img__container {
+    height: 24em;
+    width: 70%;
   }
   .product-info__container__product {
-    padding: 7em 0.5em;
-    
+    padding: 1em 0.5em;
   }
-  .product-info__container__product__container__content{
+  .product-info__container__product__container__content {
     column-gap: 2em;
+  }
+  .product-info__quantity-btn__container {
+    flex-direction: row;
+    align-items: flex-end;
   }
 }

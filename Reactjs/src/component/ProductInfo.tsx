@@ -46,14 +46,6 @@ function ProductInfo({
     return setQuantityOfProduct(quantityOfProduct - 1);
   };
 
-  // const addProductToCart = () => {
-  //   let params = {
-  //     quantity: quantityOfProduct,
-  //     product_ID: ID,
-  //   };
-  //   Api({ method: "post", fetchApiUrl: "carts", data: params });
-  // };
-
   const domNode = useClickOutside(() => {
     setIsProductPopupOn(false);
   });
@@ -72,7 +64,9 @@ function ProductInfo({
           </div>
           <div className="product-info__container__product__container">
             <div className="product-info__container__product__container__content">
-              <h3 className="product-info__container__product__container__content__name">{title}</h3>
+              <h3 className="product-info__container__product__container__content__name">
+                {title}
+              </h3>
               <p>Description</p>
               <p>{content}</p>
               <p>Serial Number</p>
@@ -86,38 +80,39 @@ function ProductInfo({
               <p>Packaging</p>
               <p>{packaging}</p>
             </div>
-            <div>
-              <p className="product-info__quantity__title">Quantity</p>
-              <div className="product-info__container__product__quantity">
-                <p>{quantityOfProduct}</p>
-                <div className="product-info__container__product__quantity__arrows">
-                  <span onClick={() => incrementQuantity()}>
-                    <i className="fas fa-sort-up"></i>
-                  </span>
-                  <span onClick={() => decrementQuantity()}>
-                    <i className="fas fa-sort-down"></i>
-                  </span>
+            <div className="product-info__quantity-btn__container">
+              <div>
+                <p className="product-info__quantity__title">Quantity</p>
+                <div className="product-info__container__product__quantity">
+                  <p>{quantityOfProduct}</p>
+                  <div className="product-info__container__product__quantity__arrows">
+                    <span onClick={() => incrementQuantity()}>
+                      <i className="fas fa-sort-up"></i>
+                    </span>
+                    <span onClick={() => decrementQuantity()}>
+                      <i className="fas fa-sort-down"></i>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <button
-                type="button"
-                className="wrapper__signin__form__button"
-                disabled={quantityOfProduct === 0}
-                onClick={() => {
-                  if (addProductToCart !== undefined) {
-                    addProductToCart({
-                      ID,
-                      quantityOfProduct,
-                    });
-                    setIsProductPopupOn(false);
-                  }
-                }}
-              >
-                {" "}
-                Add to cart
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="wrapper__signin__form__button"
+                  disabled={quantityOfProduct === 0}
+                  onClick={() => {
+                    if (addProductToCart !== undefined) {
+                      addProductToCart({
+                        ID,
+                        quantityOfProduct,
+                      });
+                      setIsProductPopupOn(false);
+                    }
+                  }}
+                >
+                  Add to cart
+                </button>
+              </div>
             </div>
           </div>
         </div>
