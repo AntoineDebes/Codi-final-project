@@ -26,15 +26,14 @@ function Routes() {
             path="/productupdateremove"
             element={<ProductUpdateRemove />}
           />
-        <Route path="/cart" element={<Cart />} />
         </Route>
         <Route
           path="/verifyemail/:authtoken"
           element={<EmailVerification />}
         ></Route>
+        <Route path="/cart" element={<Cart />} />
       </ReactRoutes>
       <Footer />
-
     </Router>
   );
 }

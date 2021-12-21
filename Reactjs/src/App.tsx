@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { IsAuthContextProvider } from "./context/IsAuth";
@@ -7,15 +7,12 @@ import Axios from "axios";
 import { BounceLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAppContext } from "./context/AppContext";
-import Api from "./API";
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
   Axios.interceptors.request.use((res: any) => {
-    if (res.url.match(/userLogin$|cart|products/)) return res;
+    if (res.url.match(/userLogin$|cart$|products$/)) return res;
     setIsLoading(true);
     return res;
   });
@@ -23,12 +20,12 @@ function App() {
   Axios.interceptors.response.use(
     (res: any) => {
       if (res || res.status !== 200) {
-          setIsLoading(false);
+        setIsLoading(false);
       }
       return res;
     },
     (err: any) => {
-        setIsLoading(false);
+      setIsLoading(false);
       return Promise.reject(err);
     }
   );
@@ -48,7 +45,11 @@ function App() {
       />
       {isLoading && (
         <div className="loading__popup__container">
-          <BounceLoader loading={isLoading} size={150} color="var(--primary-color)" />
+          <BounceLoader
+            loading={isLoading}
+            size={150}
+            color="var(--primary-color)"
+          />
         </div>
       )}
 
