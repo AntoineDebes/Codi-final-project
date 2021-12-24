@@ -1,8 +1,8 @@
 import multer from "multer";
 
 const imageFilter = function (req, file, cb) {
-  console.log("file", file);
-  console.log("req", req.file);
+  // console.log("file", file);
+  // console.log("req", req.file);
 
   if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
     return cb(new Error("Only image files are allowed!"), false);

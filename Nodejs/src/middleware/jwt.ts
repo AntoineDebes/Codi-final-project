@@ -10,7 +10,6 @@ export const jwtVerify = async (
   response: Response,
   next: Function
 ) => {
-  console.log(request.headers["authorization"]);
   const userJwt = request.headers["authorization"];
 
   if (!!userJwt.length) {
@@ -20,8 +19,6 @@ export const jwtVerify = async (
         process.env.ACCESS_TOKEN_SECRET,
         async function (err: any, decoded: any) {
           if (err) {
-            console.log("err");
-
             throw new Error("invalid token");
           } else {
             request.userID = decoded.ID;
@@ -30,8 +27,6 @@ export const jwtVerify = async (
         }
       )
       .catch((err: Error) => {
-        console.log("errored");
-
         return response.status(401).json({ message: "User not Authorized" });
       });
   } else {

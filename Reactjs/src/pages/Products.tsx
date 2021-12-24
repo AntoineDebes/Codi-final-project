@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import "./Products.css";
 import ProductCard from "../component/ProductCard";
-
-import Api from "../API";
-import { toast } from "react-toastify";
+import { useAppContext } from "../context/AppContext";
 
 interface ProductsModel {
   ID: string;
@@ -19,25 +16,14 @@ interface ProductsModel {
 }
 
 function Products() {
-  const [products, setProducts] = useState<any>();
-  useEffect(() => {
-    Api({ method: "get", fetchApiUrl: "products" })
-      .then((res: any) => {
-        console.log(res.data);
-
-        setProducts(res.data);
-      })
-      .catch((err: any) => {
-        toast(err.response.data.message);
-      });
-  }, []);
+  const { productItems } = useAppContext();
   return (
     <div className="wrapper__container products__grid__container">
       <div className="wrapper__container__header">
         <h1>Our products</h1>
       </div>
       <section className="wrapper__container__products">
-        {products?.sales.map(
+        {productItems?.sales.map(
           ({
             ID,
             content,
@@ -68,7 +54,7 @@ function Products() {
             );
           }
         )}
-        {products?.normal.map(
+        {productItems?.normal.map(
           ({
             ID,
             content,

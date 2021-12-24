@@ -21,8 +21,6 @@ function AddProductPage() {
   };
   const onSubmitHandler: SubmitHandler<AdminProductModel> = (data) => {
     if (image) {
-      console.log("passing");
-
       let params = {
         name: data.name,
         serialNumber: data.serial_number,
@@ -35,7 +33,6 @@ function AddProductPage() {
         imageFormat: image?.Format ?? "",
         base64: image?.Base64 ?? "",
       };
-      console.log({ params });
 
       Api({ method: "POST", fetchApiUrl: "products", data: params })
         .then((res: any) => {
@@ -292,7 +289,9 @@ function AddProductPage() {
             />
           </div>
 
-          <button type="submit" className="add-product__form__button">Submit</button>
+          <button type="submit" className="add-product__form__button">
+            Submit
+          </button>
         </form>
       </main>
     </>

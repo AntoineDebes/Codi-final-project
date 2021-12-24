@@ -29,16 +29,12 @@ function Signin({ setIsLoginOpen }: SigninProps) {
   });
 
   const onSubmit: SubmitHandler<UserLoginModel> = (data) => {
-    console.log("submitting");
-
     let params: UserLoginModel = {
       email: data.email,
       password: data.password,
     };
     API({ method: "post", fetchApiUrl: "userLogin", data: params })
       .then((res: any) => {
-        console.log("response");
-
         if (res.status === 200) {
           let useCredentials = { isUserAuth: true, isAdmin: res.data.isAdmin };
           localStorage.setItem("Token", res.data.token);
@@ -114,7 +110,9 @@ function Signin({ setIsLoginOpen }: SigninProps) {
                 Register
               </p>
             </div>
-            <button type="submit" className="wrapper__signin__form__button">Login</button>
+            <button type="submit" className="wrapper__signin__form__button">
+              Login
+            </button>
           </form>
         )}
       </div>

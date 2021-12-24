@@ -12,7 +12,6 @@ export const nodemailerEmailVerification = async ({
       pass: process.env.NODEMAIL_PASSWORD,
     },
   });
-  console.log("token", token);
 
   const mailOptions = {
     from: "fps@antoinedebes.codes",

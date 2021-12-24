@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./ProductInfo.css";
-
 import { useClickOutside } from "../context/ClickOutside";
-import Api from "../API";
 import { useAppContext } from "../context/AppContext";
 
 interface ProductInfoProps {
@@ -21,7 +19,6 @@ interface ProductInfoProps {
 }
 
 function ProductInfo({
-  imageAlt,
   title,
   content,
   price,

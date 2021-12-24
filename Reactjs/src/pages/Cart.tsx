@@ -1,11 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { useIsAuthContext } from "../context/IsAuth";
 import "./Cart.css";
-import Api from "../API";
 import { useAppContext } from "../context/AppContext";
 
 export default function Cart() {
-  const [isUserCarts, setIsUserCarts] = useState<any>();
   const { cartItems, removeProductFromCart } = useAppContext();
   return (
     <div className="cart__container">
@@ -54,7 +50,9 @@ export default function Cart() {
                   >
                     Remove
                   </button>
-                  <button disabled className="button__submit__signup">Checkout</button>
+                  <button disabled className="button__submit__signup">
+                    Checkout
+                  </button>
                 </div>
               </div>
             </div>

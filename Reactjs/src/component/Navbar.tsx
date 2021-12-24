@@ -5,7 +5,7 @@ import "./Navbar.css";
 import Signin from "./Signin";
 import { useIsAuthContext } from "../context/IsAuth";
 import { useAppContext } from "../context/AppContext";
-import { LogoDark} from "../images"
+import { LogoDark } from "../images";
 
 function NavbarComponent() {
   const {
@@ -26,7 +26,6 @@ function NavbarComponent() {
     setIsUserLogedIn(false);
     localStorage.clear();
   };
-  console.log(isAdmin, isUserAuth);
 
   return (
     <>
@@ -34,7 +33,9 @@ function NavbarComponent() {
       <div className="navbar__container--before">
         <Navbar expand="sm" className="navbar__container">
           <Container>
-            <Navbar.Brand href="/"><img src={LogoDark} alt="LOGO Dark" /></Navbar.Brand>
+            <Navbar.Brand href="/">
+              <img src={LogoDark} alt="LOGO Dark" />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse
               id="basic-navbar-nav"
@@ -44,9 +45,17 @@ function NavbarComponent() {
                 <Link to="/">Home</Link>
                 <Link to="/products">Products</Link>
                 {isAdmin ? (
-                  <NavDropdown title={"Dashboard"} id="basic-nav-dropdown" >
-                    <Nav.Link href="/addadminproducts" className="navbar__cart-length__container navbar__color__green">Add Products</Nav.Link>
-                    <Nav.Link href="/productupdateremove" className="navbar__cart-length__container navbar__color__green">
+                  <NavDropdown title={"Dashboard"} id="basic-nav-dropdown">
+                    <Nav.Link
+                      href="/addadminproducts"
+                      className="navbar__cart-length__container navbar__color__green"
+                    >
+                      Add Products
+                    </Nav.Link>
+                    <Nav.Link
+                      href="/productupdateremove"
+                      className="navbar__cart-length__container navbar__color__green"
+                    >
                       Delete Products
                     </Nav.Link>
                   </NavDropdown>
@@ -54,7 +63,10 @@ function NavbarComponent() {
               </Nav>
               {isUserAuth ? (
                 <NavDropdown title={navDropdownTitle} id="basic-nav-dropdown">
-                  <Nav.Link href="/cart" className="navbar__cart-length__container">
+                  <Nav.Link
+                    href="/cart"
+                    className="navbar__cart-length__container"
+                  >
                     Cart
                     {!!cartItems?.length ? (
                       <div className="navbar__cart-length__circle">

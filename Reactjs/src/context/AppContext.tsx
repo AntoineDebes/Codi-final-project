@@ -1,22 +1,34 @@
 import { useState, useContext, createContext, useEffect } from "react";
-import { toast } from "react-toastify";
 import Api from "../API";
-interface AppContextProps {
-  appContext: any;
-}
+
 interface AddProductAPI {
   quantityOfProduct: number;
   ID: string;
 }
-type ContextType = {
+
+interface appContextProps {
   cartItems: any[];
+  productItems: {
+    sales: any[];
+    normal: any[];
+    hero: any[];
+  };
   cartStorage: "local" | "server";
+}
+
+interface ContextType extends appContextProps {
   addProductToCart: (product: AddProductAPI) => void;
   removeProductFromCart: (id: number) => void;
   updateProductQuantityFromCart: (id: number, qunatity: number) => void;
-};
+}
+
 const defaultAppContextData = {
   cartItems: [],
+  productItems: {
+    sales: [],
+    normal: [],
+    hero: [],
+  },
   addProductToCart: () => {
     console.log("");
   },
@@ -34,42 +46,60 @@ export function useAppContext() {
 }
 
 export function AppContextProvider({ children }: any) {
-  const [appContext, setAppContext] = useState<any>({
+  const [appContext, setAppContext] = useState<appContextProps>({
     cartItems: [],
     cartStorage: "local",
+    productItems: {
+      sales: [],
+      normal: [],
+      hero: [],
+    },
   });
+
+  const fetchProdcuts = () => {
+    Api({ method: "get", fetchApiUrl: "products" })
+      .then((res: any) => {
+        setAppContext((data: appContextProps) => ({
+          ...data,
+          productItems: res.data,
+        }));
+      })
+      .catch((err: any) => {
+        console.log("error", err);
+        setAppContext((data: appContextProps) => ({
+          ...data,
+          productItems: { sales: [], normal: [], hero: [] },
+        }));
+      });
+  };
+
   const fetchUserCart = () => {
     Api({ method: "get", fetchApiUrl: "carts" })
       .then((res: any) => {
-        console.log("res.data", res.data);
-        setAppContext({
-          ...appContext,
+        setAppContext((data: appContextProps) => ({
+          ...data,
           cartItems: res.data.result,
-        });
+        }));
       })
-      .catch((err: any) => {
-        console.log("res.data err", err);
-        setAppContext({
-          ...appContext,
-          cartItems: [],
-        });
-        // err.reponse.data.message && toast(err.reponse.data.message)
+      .catch((_) => {
+        setAppContext((data: appContextProps) => ({ ...data, cartItems: [] }));
       });
   };
 
   useEffect(() => {
+    fetchProdcuts();
     fetchUserCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addProductToCart = ({ ID, quantityOfProduct }: AddProductAPI) => {
-    console.log("Product added to cart");
     addProductToCartFetch({ ID, quantityOfProduct });
   };
 
-  const addProductToCartFetch = (props: AddProductAPI) => {
+  const addProductToCartFetch = ({ quantityOfProduct, ID }: AddProductAPI) => {
     let params = {
-      quantity: props.quantityOfProduct,
-      product_ID: props.ID,
+      quantity: quantityOfProduct,
+      product_ID: ID,
     };
     Api({ method: "post", fetchApiUrl: "carts", data: params }).then((_) => {
       fetchUserCart();
@@ -85,9 +115,9 @@ export function AppContextProvider({ children }: any) {
   };
 
   const removeProductFromCart = (ID: number) => {
-    console.log("Context removing product", ID);
     removeProductToCartFetch(ID);
   };
+
   const updateProductQuantityFromCart = () => {
     console.log("Product quantity updated in cart");
   };

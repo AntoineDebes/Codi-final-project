@@ -2,9 +2,7 @@ import { GetUserAuthInfoRequest } from "../entity/Request";
 import { CartModel } from "../entity/CartModel";
 import query from "./db";
 
-async function AllCart(req: GetUserAuthInfoRequest) {
-  const { userID } = req;
-
+async function AllCart({ userID }) {
   const result = await query(`SELECT * from cart_product WHERE user_id=?`, [
     userID,
   ]);
@@ -16,10 +14,7 @@ async function AllCart(req: GetUserAuthInfoRequest) {
   throw new Error("Error");
 }
 
-async function CreateCart(req: GetUserAuthInfoRequest) {
-  const { userID } = req;
-  const { quantity, product_ID }: CartModel = req.body;
-
+async function CreateCart({ userID, quantity, product_ID }) {
   const fetchUserCarts = await query(
     `
   SELECT * from cart_product WHERE user_id=? AND product_ID=?`,
@@ -27,8 +22,7 @@ async function CreateCart(req: GetUserAuthInfoRequest) {
   );
 
   if (!!fetchUserCarts.length) {
-    console.log("fetchUserCarts", fetchUserCarts);
-    return await UpdateCart(req);
+    return await UpdateCart({ userID, quantity, product_ID });
   }
 
   const result = await query(
@@ -46,10 +40,7 @@ async function CreateCart(req: GetUserAuthInfoRequest) {
   throw new Error("Something went wrong");
 }
 
-async function UpdateCart(req: GetUserAuthInfoRequest) {
-  const { userID } = req;
-  const { quantity, product_ID }: CartModel = req.body;
-
+async function UpdateCart({ userID, quantity, product_ID }) {
   const result = await query(
     `UPDATE cart_product 
       SET Quantity=? 
@@ -64,9 +55,7 @@ async function UpdateCart(req: GetUserAuthInfoRequest) {
   throw new Error("Something went wrong");
 }
 
-async function DeleteCart(req: GetUserAuthInfoRequest) {
-  const { id }: any = req.body;
-  const { userID } = req;
+async function DeleteCart({ id, userID }) {
   const result = await query(
     `DELETE FROM cart_product WHERE ID=? AND user_id=?`,
     [id, userID]

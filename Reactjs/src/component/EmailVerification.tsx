@@ -2,22 +2,27 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EmailVerification.css";
 import Api from "../API";
+import { toast } from "react-toastify";
 
 function EmailVerification(props: any) {
   const { authtoken } = useParams();
 
   const navigate = useNavigate();
-  useEffect(() => {
+
+  const verifyUserToken = () => {
     Api({
       method: "post",
       fetchApiUrl: "emailverification",
       tokenProp: authtoken,
-    }).then((res) => {
-      if (res) {
-        console.log("yes");
-      }
+    }).then((_) => {
+      toast("Email registered Successfully");
     });
+  };
+  useEffect(() => {
+    verifyUserToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   function NavigateToSignIn() {
     navigate("/", { replace: true });
   }

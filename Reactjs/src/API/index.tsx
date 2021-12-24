@@ -10,7 +10,6 @@ interface ApiProps {
 
 function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
   const token = tokenProp || localStorage.getItem("Token") || "";
-  console.log("token", token);
 
   return new Promise((res, rej) => {
     Axios({
@@ -24,11 +23,11 @@ function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
       timeout: 30000,
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         res(response);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         rej(err);
       });
   });

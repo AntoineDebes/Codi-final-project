@@ -29,8 +29,8 @@ async function GetAllProduct() {
   }
   throw new Error(unkownError);
 }
-async function GetOneProduct(productId: number | string) {
-  const result = await query(`SELECT * FROM product WHERE ID = ${productId}`);
+async function GetOneProduct(product_ID: string | number) {
+  const result = await query(`SELECT * FROM product WHERE ID = ${product_ID}`);
 
   if (result.length) {
     return result[0];
@@ -38,24 +38,21 @@ async function GetOneProduct(productId: number | string) {
   throw new Error(unkownError);
 }
 
-async function CreateProduct(req: ProductModel) {
-  const {
-    userID,
-    body: {
-      name,
-      serialNumber,
-      price,
-      quantity,
-      packaging,
-      transport,
-      base64,
-      imageFormat,
-      productPlacement,
-      content,
-    },
-  }: ProductModel = req;
-  // console.log(name, serialNumber, price, quantity, packaging, transport);
-
+async function CreateProduct({
+  userID,
+  body: {
+    name,
+    serialNumber,
+    price,
+    quantity,
+    packaging,
+    transport,
+    base64,
+    imageFormat,
+    productPlacement,
+    content,
+  },
+}: ProductModel) {
   await isAdminCheck(userID);
 
   const result = await query(
@@ -86,12 +83,7 @@ async function CreateProduct(req: ProductModel) {
   throw new Error(unkownError);
 }
 
-async function DeleteProduct(req: GetProductInfoRequest) {
-  const {
-    body: { productID },
-    userID,
-  } = req;
-
+async function DeleteProduct({ productID, userID }) {
   await isAdminCheck(userID);
 
   const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);

@@ -6,17 +6,15 @@ import query from "./db";
 import bcrypt from "bcrypt";
 import { nodemailerEmailVerification } from "./Nodemailer";
 
-async function CreateUser(req: Request) {
-  const {
-    firstName,
-    lastName,
-    userName,
-    phone,
-    email,
-    password,
-    address,
-  }: UserModelCreate = req.body;
-
+async function CreateUser({
+  firstName,
+  lastName,
+  userName,
+  phone,
+  email,
+  password,
+  address,
+}) {
   email.toLowerCase();
 
   const hashedPassword = await bcrypt.hash(
@@ -44,19 +42,15 @@ async function CreateUser(req: Request) {
     [token, ID]
   );
 
-  let data: any = "Error in creating user";
-
   if (result.affectedRows && tokenInsert.affectedRows) {
     await nodemailerEmailVerification({ email, token, userName });
-    data = { message: "success" };
+    return { message: "success" };
   }
 
-  return { data };
+  throw new Error("Error in creating user");
 }
 
-async function LogUserIn(req: Request) {
-  const { email, password }: UserModelLogin = req.body;
-
+async function LogUserIn({ email, password }) {
   email.toLowerCase();
 
   const users: any[] = await query(
@@ -66,7 +60,9 @@ async function LogUserIn(req: Request) {
   );
   const user = users[0];
 
-  if (user.verified !== 1) {
+  if (!user) {
+    throw new Error("Email doesn't exist");
+  } else if (user.verified !== 1) {
     throw new Error("Please check your email for verfication");
   } else if (!!user) {
     const verifyPassword = await bcrypt.compare(password, user.password);
@@ -83,8 +79,7 @@ async function LogUserIn(req: Request) {
   throw new Error("Invalid username or password");
 }
 
-async function EmailVerification(req: GetUserAuthInfoRequest) {
-  const { userID } = req;
+async function EmailVerification({ userID }) {
   const result = await query(
     `UPDATE users 
     SET verified=? 
@@ -92,27 +87,24 @@ async function EmailVerification(req: GetUserAuthInfoRequest) {
     [1, userID]
   );
 
-  let message = "Error in verifying user";
-
   if (result.affectedRows) {
-    message = "success";
+    return { message: "success" };
   }
 
-  return { message };
+  throw new Error("Error in verifying user");
 }
 
 async function deleteUser(req: GetUserAuthInfoRequest) {
   const { userID } = req;
 
   const result = await query(`DELETE FROM users WHERE ID=?`, [userID]);
-  let message = "Error in deleting your profile";
 
   if (result.affectedRows) {
     return {
       message: "success",
     };
   }
-  return { message };
+  throw new Error("Error in deleting your profile");
 }
 
 const UserCrud = {
