@@ -11,8 +11,7 @@ interface ProductInfoProps {
   packaging: string;
   serial_number: string;
   quantity: string;
-  Base64: string;
-  ImageFormat: string;
+  image_path: any;
   transport: string;
   setIsProductPopupOn: Function;
   ID: string;
@@ -25,8 +24,7 @@ function ProductInfo({
   packaging,
   serial_number,
   quantity,
-  Base64,
-  ImageFormat,
+  image_path,
   transport,
   setIsProductPopupOn,
   ID,
@@ -57,7 +55,7 @@ function ProductInfo({
             <i className="fas fa-times" />
           </div>
           <div className="product-info__img__container">
-            <img src={`${ImageFormat},${Base64}`} alt="Product pic" />
+            <img src={image_path} alt="Product pic" />
           </div>
           <div className="product-info__container__product__container">
             <div className="product-info__container__product__container__content">

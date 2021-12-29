@@ -1,5 +1,6 @@
 import { useState, useContext, createContext, useEffect } from "react";
 import Api from "../API";
+import { ProductCardProps } from "../Models/DataModels/ProductCardModel";
 
 interface AddProductAPI {
   quantityOfProduct: number;
@@ -9,9 +10,9 @@ interface AddProductAPI {
 interface appContextProps {
   cartItems: any[];
   productItems: {
-    sales: any[];
-    normal: any[];
-    hero: any[];
+    sales: ProductCardProps[];
+    normal: ProductCardProps[];
+    hero: ProductCardProps[];
   };
   cartStorage: "local" | "server";
 }

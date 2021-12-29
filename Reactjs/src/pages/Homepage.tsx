@@ -14,18 +14,12 @@ function Homepage(): JSX.Element {
         <div className="wrapper__container__hero__container">
           <Carousel className="wrapper__container__hero">
             {productItems?.hero.map(
-              ({
-                content,
-                ImageFormat,
-                Base64,
-                ID,
-                name,
-              }: HomepageCardProps) => {
+              ({ content, image_path, ID, name }: HomepageCardProps) => {
                 return (
                   <Carousel.Item key={ID}>
                     <img
                       className="d-block w-100"
-                      src={`${ImageFormat},${Base64}`}
+                      src={image_path}
                       alt="Second slide"
                     />
 
@@ -46,37 +40,9 @@ function Homepage(): JSX.Element {
             </h2>
           </div>
           <div className="wrapper__container__homepage__hot-sales__container">
-            {productItems?.sales?.map(
-              ({
-                ID,
-                content,
-                name,
-                price,
-                packaging,
-                serial_number,
-                quantity,
-                transport,
-                ImageFormat,
-                Base64,
-              }: ProductCardProps) => {
-                return (
-                  <ProductCard
-                    content={content}
-                    ImageFormat={ImageFormat}
-                    Base64={Base64}
-                    imageAlt="Image"
-                    name={name}
-                    price={price}
-                    key={ID}
-                    ID={ID}
-                    packaging={packaging}
-                    serial_number={serial_number}
-                    quantity={quantity}
-                    transport={transport}
-                  />
-                );
-              }
-            )}
+            {productItems?.sales?.map((productItems: ProductCardProps) => {
+              return <ProductCard key={productItems.ID} {...productItems} />;
+            })}
           </div>
         </div>
       </main>

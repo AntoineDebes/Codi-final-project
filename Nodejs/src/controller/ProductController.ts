@@ -1,10 +1,10 @@
+import { ProductRequestModel } from "./../entity/ProductModel";
 import { NextFunction, Request, Response } from "express";
-import { ProductModel } from "../entity/ProductModel";
 import { GetProductInfoRequest } from "../entity/Request";
 import ProductCrud from "../service/ProductService";
 
 export class ProductController {
-  async getAll(request: Request, response: Response, next: NextFunction) {
+  async getAll(request: Request, response: Response) {
     try {
       return response.status(200).json(await ProductCrud.GetAllProduct());
     } catch (error) {
@@ -13,7 +13,7 @@ export class ProductController {
       });
     }
   }
-  async add(request: ProductModel, response: Response, next: NextFunction) {
+  async add(request: ProductRequestModel, response: Response) {
     const {
       userID,
       body: {
@@ -23,28 +23,23 @@ export class ProductController {
         quantity,
         packaging,
         transport,
-        base64,
-        imageFormat,
         productPlacement,
         content,
       },
-    }: ProductModel = request;
+      file: { filename },
+    }: ProductRequestModel = request;
     try {
       return response.status(200).json(
         await ProductCrud.CreateProduct({
-          userID,
-          body: {
-            name,
-            serialNumber,
-            price,
-            quantity,
-            packaging,
-            transport,
-            base64,
-            imageFormat,
-            productPlacement,
-            content,
-          },
+          name,
+          serialNumber,
+          price,
+          quantity,
+          packaging,
+          transport,
+          productPlacement,
+          content,
+          filename,
         })
       );
     } catch (error) {
@@ -53,7 +48,7 @@ export class ProductController {
       });
     }
   }
-  async delete(request: Request, response: Response, next: NextFunction) {
+  async delete(request: Request, response: Response) {
     const {
       body: { productID },
       userID,

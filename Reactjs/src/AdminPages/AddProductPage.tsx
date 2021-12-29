@@ -12,7 +12,7 @@ function AddProductPage() {
     reset,
     formState: { errors },
   } = useForm<AdminProductModel>();
-  const [image, setImage] = useState<any>();
+  const [image, setImage] = useState<File>();
   const [fileName, setFileName] = useState<string>("");
   const hiddenFileInput = useRef<any>(null);
   const [productPlacement, setProductPlacement] = useState(undefined);
@@ -21,7 +21,7 @@ function AddProductPage() {
   };
   const onSubmitHandler: SubmitHandler<AdminProductModel> = (data) => {
     if (image) {
-      let params = {
+      let params: any = {
         name: data.name,
         serialNumber: data.serial_number,
         price: data.price,
@@ -30,11 +30,14 @@ function AddProductPage() {
         transport: data.transport,
         productPlacement: data.productPlacement,
         content: data.description,
-        imageFormat: image?.Format ?? "",
-        base64: image?.Base64 ?? "",
+        image: image,
       };
+      const bodyFormData = new FormData();
+      Object.keys(params).forEach((key) => {
+        bodyFormData.append(key, params[key]);
+      });
 
-      Api({ method: "POST", fetchApiUrl: "products", data: params })
+      Api({ method: "POST", fetchApiUrl: "products", data: bodyFormData })
         .then((res: any) => {
           reset();
           setFileName("");
@@ -46,30 +49,11 @@ function AddProductPage() {
     }
   };
 
-  function convertBase64(file: any) {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  }
-
   async function FileUploadChange(event: any) {
     const file = event.target.files[0];
     setFileName(file.name);
-    let base64: any = (await convertBase64(file)) + "";
-    let imagearray: any[] = base64.split(",");
 
-    let Image: any = {
-      Format: imagearray[0],
-      Base64: imagearray[1],
-    };
-    setImage(Image);
+    setImage(file);
   }
   function handleUploadClick() {
     hiddenFileInput?.current?.click();

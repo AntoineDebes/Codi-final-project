@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "esnext",
     "module": "commonjs",
     "lib": [
-      "es2017"
+      "esnext"
     ],
     "outDir": "dist",
     "rootDirs": ["src","./"],

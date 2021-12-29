@@ -1,6 +1,5 @@
 export interface HomepageCardProps {
-  ImageFormat: string;
-  Base64: string;
+  image_path: any;
   imageAlt: string;
   name: string;
   content: string;

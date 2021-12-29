@@ -9,7 +9,7 @@ export default function Cart() {
         ({
           ID,
           Quantity,
-          product: { ImageFormat, Base64, name, price, transport, packaging },
+          product: { image_path, name, price, transport, packaging },
         }: any) => {
           let totalPriceHT = Quantity * price + +transport + +packaging;
           let vat = totalPriceHT * 0.11;
@@ -17,7 +17,7 @@ export default function Cart() {
           return (
             <div key={ID} className="cart__card__container">
               <div className="cart__card__img__container">
-                <img src={`${ImageFormat}, ${Base64}`} alt="" />
+                <img src={image_path} alt="" />
               </div>
               <div>
                 <span>Quantity: </span>
@@ -43,7 +43,7 @@ export default function Cart() {
                     type="button"
                     className="button__submit__signup"
                     onClick={() => {
-                      if (removeProductFromCart !== undefined) {
+                      if (!!removeProductFromCart) {
                         removeProductFromCart(ID);
                       }
                     }}

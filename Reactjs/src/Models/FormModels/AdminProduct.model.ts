@@ -7,5 +7,5 @@ export type AdminProductModel = {
   transport: string;
   productPlacement: string;
   description: string;
-  Image?: string;
+  image?: string;
 };

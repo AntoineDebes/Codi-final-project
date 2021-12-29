@@ -1,19 +1,22 @@
 import { GetProductInfoRequest } from "../entity/Request";
 import { ProductModel } from "../entity/ProductModel";
 import query from "./db";
-import { isAdminCheck } from "./IsAdminCheck";
 
 const unkownError = "Something went wrong, Please try again later";
 
 async function GetAllProduct() {
-  const result = await query(`SELECT * FROM product`);
+  const result = (await query(`SELECT * FROM product`)).map((_product) => {
+    return {
+      ..._product,
+      image_path: `${process.env.SERVER_URL}upload/${_product.image_path}`,
+    };
+  });
 
   let nestedObject: any = {
     hero: [],
     sales: [],
     normal: [],
   };
-
   if (result) {
     nestedObject.hero = result.filter((_product: any) => {
       return _product.productPlacement === "hero";
@@ -29,37 +32,35 @@ async function GetAllProduct() {
   }
   throw new Error(unkownError);
 }
+
 async function GetOneProduct(product_ID: string | number) {
   const result = await query(`SELECT * FROM product WHERE ID = ${product_ID}`);
 
   if (result.length) {
-    return result[0];
+    return {
+      ...result[0],
+      image_path: `${process.env.SERVER_URL}upload/${result[0].image_path}`,
+    };
   }
   throw new Error(unkownError);
 }
 
 async function CreateProduct({
-  userID,
-  body: {
-    name,
-    serialNumber,
-    price,
-    quantity,
-    packaging,
-    transport,
-    base64,
-    imageFormat,
-    productPlacement,
-    content,
-  },
+  name,
+  serialNumber,
+  price,
+  quantity,
+  packaging,
+  transport,
+  productPlacement,
+  content,
+  filename,
 }: ProductModel) {
-  await isAdminCheck(userID);
-
   const result = await query(
     `INSERT INTO product
-      (name, serial_number, price, quantity, packaging, transport, Base64, ImageFormat, productPlacement, content) 
+      (name, serial_number, price, quantity, packaging, transport, productPlacement, content, image_path) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       name,
       serialNumber,
@@ -67,10 +68,9 @@ async function CreateProduct({
       quantity,
       packaging,
       transport,
-      base64,
-      imageFormat,
       productPlacement,
       content,
+      filename,
     ]
   );
 
@@ -84,8 +84,6 @@ async function CreateProduct({
 }
 
 async function DeleteProduct({ productID, userID }) {
-  await isAdminCheck(userID);
-
   const result = await query(`DELETE FROM product WHERE ID=?`, [productID]);
 
   if (result.affectedRows) {

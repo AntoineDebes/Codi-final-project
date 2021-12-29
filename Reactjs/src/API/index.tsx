@@ -6,6 +6,8 @@ interface ApiProps {
   data?: any;
   params?: any;
   tokenProp?: any;
+  formdata?: any;
+  imageFile?: any;
 }
 
 function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
@@ -19,6 +21,7 @@ function Api({ method, fetchApiUrl, data, params, tokenProp }: ApiProps) {
         authorization: token, // sending the token for the verification
       },
       data, // data passed
+
       params,
       timeout: 30000,
     })

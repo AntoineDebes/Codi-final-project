@@ -7,13 +7,19 @@ import { CartRoutes } from "./routes/CartRoutes";
 import { RouteModelServer } from "./entity/RoutesModel";
 import * as swaggerDocs from "../swagger.json";
 import cors from "cors";
+
 const app = express();
 const PORT = process.env.PORT || 8080;
+app.use("/upload", express.static("./upload"));
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(urlencoded({ extended: true }));
 app.use(json({ limit: "10mb" }));
 app.use(cors());
+
+// app.post("/testing", (req: Request, res: Response) => {
+//   return res.json({ ...req.file });
+// });
 
 const Routers = [UserRoutes, ProductRoutes, CartRoutes];
 

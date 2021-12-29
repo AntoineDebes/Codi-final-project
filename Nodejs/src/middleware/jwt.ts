@@ -13,22 +13,18 @@ export const jwtVerify = async (
   const userJwt = request.headers["authorization"];
 
   if (!!userJwt.length) {
-    await jwt
-      .verify(
-        request.headers["authorization"],
-        process.env.ACCESS_TOKEN_SECRET,
-        async function (err: any, decoded: any) {
-          if (err) {
-            throw new Error("invalid token");
-          } else {
-            request.userID = decoded.ID;
-            next();
-          }
+    jwt.verify(
+      request.headers["authorization"],
+      process.env.ACCESS_TOKEN_SECRET,
+      async function (err: any, decoded: any) {
+        if (err) {
+          throw new Error("invalid token");
+        } else {
+          request.userID = decoded.ID;
+          next();
         }
-      )
-      .catch((err: Error) => {
-        return response.status(401).json({ message: "User not Authorized" });
-      });
+      }
+    );
   } else {
     return response.status(401).json({ message: "User not Authorized" });
   }
