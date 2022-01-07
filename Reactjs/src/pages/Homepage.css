@@ -18,7 +18,7 @@
 }
 
 .Carousel__caption__hero {
-  font-size:0.6em;
+  font-size: 0.6em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   transform: translate(-50%, -50%);
 }
 
-.Carousel__caption__hero__title{
+.Carousel__caption__hero__title {
   font-size: 1.5em;
 }
 
@@ -44,8 +44,9 @@
 
 .wrapper__container__homepage__hot-sales__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(66px, 302px));
+  grid-template-columns: repeat(auto-fit, minmax(266px, 1fr));
   place-content: center;
+  width: 100%;
   grid-template-rows: auto;
   grid-gap: 2.5em;
   gap: 2.5em;
@@ -54,10 +55,11 @@
   margin: 0 auto;
 }
 
-@media(min-width: 740px){
-.Carousel__caption__hero {
-font-size: 1em;}
-.Carousel__caption__hero__title {
-  font-size: 2em;
-}
+@media (min-width: 740px) {
+  .Carousel__caption__hero {
+    font-size: 1em;
+  }
+  .Carousel__caption__hero__title {
+    font-size: 2em;
+  }
 }
